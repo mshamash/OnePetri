@@ -34,6 +34,8 @@ class SelectImageViewController: UIViewController {
     private var petriDetections = [PetriDish]()
     private var imgToProcess: UIImage!
     private var petriToProcess: PetriDish!
+    private let iouThreshold = 0.35
+    private let confThreshold = 0.70
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -134,7 +136,7 @@ class SelectImageViewController: UIViewController {
         
         do {
             let visionModel = try VNCoreMLModel(for: MLModel(contentsOf: modelURL))
-            visionModel.featureProvider = ModelFeatureProvider(iouThreshold: 0.35, confidenceThreshold: 0.70)
+            visionModel.featureProvider = ModelFeatureProvider(iouThreshold: iouThreshold, confidenceThreshold: confThreshold)
             let objectRecognition = VNCoreMLRequest(model: visionModel, completionHandler: { (request, error) in
                 DispatchQueue.main.async(execute: {
                     // perform all the UI updates on the main queue

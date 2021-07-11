@@ -412,10 +412,10 @@
                     <navigationItem key="navigationItem" id="GFG-Uo-uZS"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="appVersionLabel" destination="Fcy-8z-i9q" id="WBw-Ul-poE"/>
                         <outlet property="cameraButton" destination="pAb-QT-yTh" id="KD6-76-NeY"/>
                         <outlet property="photoLibraryButton" destination="gTm-Ev-waW" id="ort-jm-boa"/>
                         <outlet property="settingsButton" destination="jlZ-dg-28c" id="J2c-Mp-qXk"/>
-                        <outlet property="versionLabel" destination="Fcy-8z-i9q" id="NsY-O4-lig"/>
                         <segue destination="56S-ha-ftv" kind="show" identifier="toSettingsVC" id="kMA-gA-qak"/>
                         <segue destination="afd-Kx-fQo" kind="show" identifier="toSelectVC" id="kzu-LM-hWX"/>
                         <segue destination="0t2-7r-Y73" kind="show" identifier="toPlaqueAssayVC" id="7hs-3C-Uar"/>
@@ -432,11 +432,171 @@
                     <view key="view" contentMode="scaleToFill" id="UYV-QV-PpQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vzH-xO-4hN">
+                                <rect key="frame" x="55" y="113" width="265.33333333333331" height="105"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Petri dish detecton" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QX-12-oA9">
+                                        <rect key="frame" x="0.0" y="0.0" width="265.33333333333331" height="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="IW8-k4-qOU">
+                                        <rect key="frame" x="0.0" y="27" width="265.33333333333331" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confidence threshold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7U-T4-VXi">
+                                                <rect key="frame" x="0.0" y="0.0" width="164" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.70" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LRH-Ha-bLP">
+                                                <rect key="frame" x="209" y="0.0" width="56.333333333333314" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="56S-ha-ftv" id="msn-66-AbY"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="103" translatesAutoresizingMaskIntoConstraints="NO" id="inO-2B-xgT">
+                                        <rect key="frame" x="0.0" y="71" width="265.33333333333331" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IOU threshold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veU-WD-9KB">
+                                                <rect key="frame" x="0.0" y="0.0" width="105.33333333333333" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.35" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bk2-Mi-xio">
+                                                <rect key="frame" x="208.33333333333331" y="0.0" width="57" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="56S-ha-ftv" id="eTP-uT-MH9"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wxi-ss-NNC">
+                                <rect key="frame" x="54.666666666666657" y="243" width="266" height="149"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plaque detecton" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOo-LH-ty0">
+                                        <rect key="frame" x="0.0" y="0.0" width="266" height="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="45" translatesAutoresizingMaskIntoConstraints="NO" id="dny-kF-XxS">
+                                        <rect key="frame" x="0.0" y="27" width="266" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confidence threshold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9BM-rG-BCz">
+                                                <rect key="frame" x="0.0" y="0.0" width="164" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.85" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BQD-dV-mOG">
+                                                <rect key="frame" x="209.00000000000003" y="0.0" width="56.999999999999972" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="56S-ha-ftv" id="KPr-4O-COz"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="103" translatesAutoresizingMaskIntoConstraints="NO" id="qwb-Ej-He1">
+                                        <rect key="frame" x="0.0" y="71" width="266" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IOU threshold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qF6-wc-Ghu">
+                                                <rect key="frame" x="0.0" y="0.0" width="105.33333333333333" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.85" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gc3-4y-9Vp">
+                                                <rect key="frame" x="208.33333333333334" y="0.0" width="57.666666666666657" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="56S-ha-ftv" id="BAu-a6-cFB"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="62" translatesAutoresizingMaskIntoConstraints="NO" id="TFY-SP-Exd">
+                                        <rect key="frame" x="0.0" y="115" width="266" height="34"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NMS IOU threshold" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CKg-3Q-xZi">
+                                                <rect key="frame" x="0.0" y="0.0" width="146.66666666666666" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="0.65" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z9e-lB-1cz">
+                                                <rect key="frame" x="208.66666666666666" y="0.0" width="57.333333333333343" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="decimalPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="56S-ha-ftv" id="E20-r3-FKk"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jY5-ij-7YH">
+                                <rect key="frame" x="82.333333333333329" y="675" width="210.33333333333337" height="93"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OnePetri version 0.0.0-b0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IhB-nG-6ey">
+                                        <rect key="frame" x="7.6666666666666714" y="0.0" width="195.33333333333331" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.43431191930000002" green="0.43431191930000002" blue="0.43431191930000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Petri dish model version 0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAd-DJ-Zas">
+                                        <rect key="frame" x="0.0" y="36.333333333333371" width="210.33333333333334" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.43431191930000002" green="0.43431191930000002" blue="0.43431191930000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Plaque model version 0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wlh-dV-QSJ">
+                                        <rect key="frame" x="9.6666666666666714" y="72.666666666666629" width="191" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.43431191930000002" green="0.43431191930000002" blue="0.43431191930000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="wRP-UL-Q7D"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="wRP-UL-Q7D" firstAttribute="bottom" secondItem="jY5-ij-7YH" secondAttribute="bottom" constant="10" id="1Rl-Og-Mjb"/>
+                            <constraint firstItem="wxi-ss-NNC" firstAttribute="centerX" secondItem="UYV-QV-PpQ" secondAttribute="centerX" id="4bL-PY-TSL"/>
+                            <constraint firstItem="jY5-ij-7YH" firstAttribute="centerX" secondItem="UYV-QV-PpQ" secondAttribute="centerX" id="B60-WU-M8R"/>
+                            <constraint firstItem="wxi-ss-NNC" firstAttribute="top" secondItem="vzH-xO-4hN" secondAttribute="bottom" constant="25" id="Mib-re-I3P"/>
+                            <constraint firstItem="vzH-xO-4hN" firstAttribute="centerX" secondItem="UYV-QV-PpQ" secondAttribute="centerX" id="wSS-Fc-BqV"/>
+                            <constraint firstItem="vzH-xO-4hN" firstAttribute="top" secondItem="wRP-UL-Q7D" secondAttribute="top" constant="25" id="wVj-8g-hgZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="lWg-lj-RQG"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="appVersionLabel" destination="IhB-nG-6ey" id="cDy-Vo-RuG"/>
+                        <outlet property="petriConfTextField" destination="LRH-Ha-bLP" id="Egc-BI-rcb"/>
+                        <outlet property="petriIOUTextField" destination="bk2-Mi-xio" id="gqw-fo-VGW"/>
+                        <outlet property="petriModelVersionLabel" destination="wAd-DJ-Zas" id="9o3-4B-0uN"/>
+                        <outlet property="plaqueConfTextField" destination="BQD-dV-mOG" id="5Xk-BI-eKg"/>
+                        <outlet property="plaqueIOUTextField" destination="gc3-4y-9Vp" id="eDe-ai-AF4"/>
+                        <outlet property="plaqueModelVersionLabel" destination="Wlh-dV-QSJ" id="Ufp-YQ-f3h"/>
+                        <outlet property="plaqueNMSIOUTextField" destination="z9e-lB-1cz" id="AjX-3E-QDg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Gg-4c-nN3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

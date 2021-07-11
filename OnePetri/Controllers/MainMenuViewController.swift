@@ -11,9 +11,11 @@ enum Assay { case quick, plaque, adsorption, eop }
 
 let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
 let appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+let petriDishModelVersion = "1.0"
+let plaqueModelVersion = "1.0"
 
 class MainMenuViewController: UIViewController {
-    @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var appVersionLabel: UILabel!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var photoLibraryButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
@@ -24,7 +26,7 @@ class MainMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        versionLabel.text = "Version \(appVersion)-\(appBuild)"
+        appVersionLabel.text = "Version \(appVersion)-\(appBuild)"
     }
     
     override func viewWillAppear(_ animated: Bool) {
