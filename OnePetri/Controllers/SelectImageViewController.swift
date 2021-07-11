@@ -111,7 +111,7 @@ class SelectImageViewController: UIViewController {
         let alert = UIAlertController(title: "Missing petri dish?", message: "If a petri dish was not detected, you may submit the selected image to help improve future iterations of OnePetri's AI models. Would you like to submit this image for analysis?", preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Send Image", style: .default, handler: { _ in
-            self.sendMail(imageView: self.imageView, imageType: "petri dish")
+            self.sendMail(imageMail: true, imageView: self.imageView, imageType: "petri dish")
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         

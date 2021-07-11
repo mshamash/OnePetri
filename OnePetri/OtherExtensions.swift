@@ -29,15 +29,19 @@ extension UITextField {
 }
 
 extension UIViewController: MFMailComposeViewControllerDelegate {
-    func sendMail(imageView: UIImageView, imageType: String) {
+    func sendMail(imageMail: Bool, imageView: UIImageView? = nil, imageType: String? = nil) {
       if MFMailComposeViewController.canSendMail() {
         let mail = MFMailComposeViewController()
         mail.mailComposeDelegate = self;
-        mail.setToRecipients(["michael@onepetri.ai"])
-        mail.setSubject("Image submission - \(imageType)")
+        mail.setToRecipients(["support@onepetri.ai"])
         mail.setMessageBody("Submitted using OnePetri, version \(appVersion)-\(appBuild)", isHTML: false)
-        let imageData = imageView.image!.pngData()!
-        mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "image.png")
+        if imageMail {
+            mail.setSubject("OnePetri Image Submission - \(imageType!)")
+            let imageData = imageView!.image!.pngData()!
+            mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "image.png")
+        } else {
+            mail.setSubject("OnePetri Feedback")
+        }
         present(mail, animated: true, completion: nil)
       }
     }

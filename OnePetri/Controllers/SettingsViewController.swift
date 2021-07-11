@@ -47,6 +47,10 @@ class SettingsViewController: UIViewController {
         petriModelVersionLabel.text = "Petri dish model version \(petriDishModelVersion)"
         plaqueModelVersionLabel.text = "Plaque model version \(plaqueModelVersion)"
     }
+    
+    @IBAction func didTapContribute(_ sender: UIButton) {
+        self.sendMail(imageMail: false)
+    }
 
 }
 
