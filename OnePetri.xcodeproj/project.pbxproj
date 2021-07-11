@@ -9,21 +9,45 @@
 /* Begin PBXBuildFile section */
 		4C573C63269A645B009FFD6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C573C62269A645B009FFD6D /* AppDelegate.swift */; };
 		4C573C65269A645B009FFD6D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C573C64269A645B009FFD6D /* SceneDelegate.swift */; };
-		4C573C67269A645B009FFD6D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C573C66269A645B009FFD6D /* ViewController.swift */; };
 		4C573C6A269A645B009FFD6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C573C68269A645B009FFD6D /* Main.storyboard */; };
 		4C573C6C269A645D009FFD6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C573C6B269A645D009FFD6D /* Assets.xcassets */; };
 		4C573C6F269A645D009FFD6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C573C6D269A645D009FFD6D /* LaunchScreen.storyboard */; };
+		4C98A366269A657F00A20495 /* CountPlaquesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A361269A657F00A20495 /* CountPlaquesViewController.swift */; };
+		4C98A367269A657F00A20495 /* SelectImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A362269A657F00A20495 /* SelectImageViewController.swift */; };
+		4C98A368269A657F00A20495 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A363269A657F00A20495 /* MainMenuViewController.swift */; };
+		4C98A369269A657F00A20495 /* PlaqueAssayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A364269A657F00A20495 /* PlaqueAssayViewController.swift */; };
+		4C98A36A269A657F00A20495 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A365269A657F00A20495 /* SettingsViewController.swift */; };
+		4C98A36F269A659100A20495 /* ModelFeatureProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A36C269A659100A20495 /* ModelFeatureProvider.swift */; };
+		4C98A370269A659100A20495 /* Yv5-petri-res320_epoch500_v4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A36D269A659100A20495 /* Yv5-petri-res320_epoch500_v4.mlmodel */; };
+		4C98A371269A659100A20495 /* plaque-res416_epochs500_bat128_v5-1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A36E269A659100A20495 /* plaque-res416_epochs500_bat128_v5-1.mlmodel */; };
+		4C98A376269A659A00A20495 /* PetriDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A373269A659A00A20495 /* PetriDish.swift */; };
+		4C98A377269A659A00A20495 /* Plaque.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A374269A659A00A20495 /* Plaque.swift */; };
+		4C98A378269A659A00A20495 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A375269A659A00A20495 /* Tile.swift */; };
+		4C98A37B269A65A500A20495 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A379269A65A500A20495 /* ImageExtensions.swift */; };
+		4C98A37C269A65A500A20495 /* OtherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A37A269A65A500A20495 /* OtherExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4C573C5F269A645B009FFD6D /* OnePetri.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePetri.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C573C62269A645B009FFD6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4C573C64269A645B009FFD6D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4C573C66269A645B009FFD6D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4C573C69269A645B009FFD6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C573C6B269A645D009FFD6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C573C6E269A645D009FFD6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C573C70269A645D009FFD6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C98A361269A657F00A20495 /* CountPlaquesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountPlaquesViewController.swift; sourceTree = "<group>"; };
+		4C98A362269A657F00A20495 /* SelectImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectImageViewController.swift; sourceTree = "<group>"; };
+		4C98A363269A657F00A20495 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		4C98A364269A657F00A20495 /* PlaqueAssayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaqueAssayViewController.swift; sourceTree = "<group>"; };
+		4C98A365269A657F00A20495 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		4C98A36C269A659100A20495 /* ModelFeatureProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelFeatureProvider.swift; sourceTree = "<group>"; };
+		4C98A36D269A659100A20495 /* Yv5-petri-res320_epoch500_v4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "Yv5-petri-res320_epoch500_v4.mlmodel"; sourceTree = "<group>"; };
+		4C98A36E269A659100A20495 /* plaque-res416_epochs500_bat128_v5-1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "plaque-res416_epochs500_bat128_v5-1.mlmodel"; sourceTree = "<group>"; };
+		4C98A373269A659A00A20495 /* PetriDish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetriDish.swift; sourceTree = "<group>"; };
+		4C98A374269A659A00A20495 /* Plaque.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plaque.swift; sourceTree = "<group>"; };
+		4C98A375269A659A00A20495 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		4C98A379269A65A500A20495 /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
+		4C98A37A269A65A500A20495 /* OtherExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +80,51 @@
 		4C573C61269A645B009FFD6D /* OnePetri */ = {
 			isa = PBXGroup;
 			children = (
+				4C98A360269A657F00A20495 /* Controllers */,
+				4C98A36B269A659100A20495 /* Models */,
+				4C98A372269A659A00A20495 /* Objects */,
 				4C573C62269A645B009FFD6D /* AppDelegate.swift */,
 				4C573C64269A645B009FFD6D /* SceneDelegate.swift */,
-				4C573C66269A645B009FFD6D /* ViewController.swift */,
+				4C98A379269A65A500A20495 /* ImageExtensions.swift */,
+				4C98A37A269A65A500A20495 /* OtherExtensions.swift */,
 				4C573C68269A645B009FFD6D /* Main.storyboard */,
 				4C573C6B269A645D009FFD6D /* Assets.xcassets */,
 				4C573C6D269A645D009FFD6D /* LaunchScreen.storyboard */,
 				4C573C70269A645D009FFD6D /* Info.plist */,
 			);
 			path = OnePetri;
+			sourceTree = "<group>";
+		};
+		4C98A360269A657F00A20495 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4C98A361269A657F00A20495 /* CountPlaquesViewController.swift */,
+				4C98A362269A657F00A20495 /* SelectImageViewController.swift */,
+				4C98A363269A657F00A20495 /* MainMenuViewController.swift */,
+				4C98A364269A657F00A20495 /* PlaqueAssayViewController.swift */,
+				4C98A365269A657F00A20495 /* SettingsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4C98A36B269A659100A20495 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4C98A36C269A659100A20495 /* ModelFeatureProvider.swift */,
+				4C98A36D269A659100A20495 /* Yv5-petri-res320_epoch500_v4.mlmodel */,
+				4C98A36E269A659100A20495 /* plaque-res416_epochs500_bat128_v5-1.mlmodel */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4C98A372269A659A00A20495 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				4C98A373269A659A00A20495 /* PetriDish.swift */,
+				4C98A374269A659A00A20495 /* Plaque.swift */,
+				4C98A375269A659A00A20495 /* Tile.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,9 +197,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C573C67269A645B009FFD6D /* ViewController.swift in Sources */,
+				4C98A37B269A65A500A20495 /* ImageExtensions.swift in Sources */,
+				4C98A368269A657F00A20495 /* MainMenuViewController.swift in Sources */,
+				4C98A37C269A65A500A20495 /* OtherExtensions.swift in Sources */,
+				4C98A371269A659100A20495 /* plaque-res416_epochs500_bat128_v5-1.mlmodel in Sources */,
+				4C98A370269A659100A20495 /* Yv5-petri-res320_epoch500_v4.mlmodel in Sources */,
+				4C98A378269A659A00A20495 /* Tile.swift in Sources */,
+				4C98A366269A657F00A20495 /* CountPlaquesViewController.swift in Sources */,
+				4C98A367269A657F00A20495 /* SelectImageViewController.swift in Sources */,
+				4C98A36F269A659100A20495 /* ModelFeatureProvider.swift in Sources */,
 				4C573C63269A645B009FFD6D /* AppDelegate.swift in Sources */,
+				4C98A369269A657F00A20495 /* PlaqueAssayViewController.swift in Sources */,
 				4C573C65269A645B009FFD6D /* SceneDelegate.swift in Sources */,
+				4C98A377269A659A00A20495 /* Plaque.swift in Sources */,
+				4C98A376269A659A00A20495 /* PetriDish.swift in Sources */,
+				4C98A36A269A657F00A20495 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +288,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -271,7 +343,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -293,10 +365,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ai.onepetri.OnePetri;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ai.onepetri.onepetri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -312,10 +385,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = ai.onepetri.OnePetri;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ai.onepetri.onepetri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
