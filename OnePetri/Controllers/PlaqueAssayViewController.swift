@@ -46,7 +46,27 @@ class PlaqueAssayViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func resetButtonPressed(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Reset plaque assay?", message: "Resetting the plaque assay will delete all images and calculations, are you sure you wish to continue?", preferredStyle: .alert)
         
+        alert.addAction(UIAlertAction(title: "Reset", style: .destructive, handler: {_ in self.resetPlaqueAssay()}))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alert, animated: true)
+    }
+    
+    func resetPlaqueAssay() {
+        plates = [Int: PetriDish]()
+        concentrations = [Int: String]()
+        meanConcentration = ""
+        volumePlated = 100.0
+        
+        volumeTextField.text = ""
+        plateStepper.value = 1
+        plateCountLabel.text = "1 plate"
+        finalConcentrationLabel.text = "Add plates to the assay to continue."
+        
+        calculateConcentration()
+        dilutionSeriesTableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
