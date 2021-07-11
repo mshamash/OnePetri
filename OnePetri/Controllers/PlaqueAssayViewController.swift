@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PlaqueAssayViewController: UIViewController, UITextFieldDelegate {
+class PlaqueAssayViewController: UIViewController {
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var plateCountLabel: UILabel!
     @IBOutlet weak var plateStepper: UIStepper!
@@ -39,10 +39,6 @@ class PlaqueAssayViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func plateValueChanged(_ sender: UIStepper) {        
         let stepperValue = Int(sender.value)
-        
-        let x = plates
-        let y = concentrations
-        let z = numberPlates
         
         if numberPlates > stepperValue {
             // stepper decreased in value, add 1 to get value before decrement
@@ -195,7 +191,7 @@ extension PlaqueAssayViewController: UITableViewDelegate, UITableViewDataSource 
     }
 }
 
-extension PlaqueAssayViewController: UITextViewDelegate {
+extension PlaqueAssayViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let volume = textField.text, !volume.isEmpty { volumePlated = Double(volume)! } else { volumePlated = 100.0 }
         calculateConcentration()
