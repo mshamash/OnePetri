@@ -34,12 +34,18 @@ class SelectImageViewController: UIViewController {
     private var petriDetections = [PetriDish]()
     private var imgToProcess: UIImage!
     private var petriToProcess: PetriDish!
-    private let iouThreshold = 0.35
-    private let confThreshold = 0.70
+    private var confThreshold: Double!
+    private var iouThreshold: Double!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let defaults = UserDefaults.standard
+        let petriConfThreshold = defaults.double(forKey: "PetriConfThreshold")
+        let petriIOUThreshold = defaults.double(forKey: "PetriIOUThreshold")
+        confThreshold = (petriConfThreshold != 0.0 ? petriConfThreshold : 0.70)
+        iouThreshold = (petriIOUThreshold != 0.0 ? petriIOUThreshold : 0.35)
         
         // setup Vision parts
         setupLayers()

@@ -37,12 +37,20 @@ class CountPlaquesViewController: UIViewController {
     let group = DispatchGroup()
     var currentTile: Tile!
     private let modelImgSize: CGFloat = 416.0
-    private let iouThreshold = 0.85
-    private let confThreshold = 0.85
-    private let nmsIOUThreshold = 0.65
+    private var confThreshold: Double!
+    private var iouThreshold: Double!
+    private var nmsIOUThreshold: Double!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let defaults = UserDefaults.standard
+        let plaqueConfThreshold = defaults.double(forKey: "PlaqueConfThreshold")
+        let plaqueIOUThreshold = defaults.double(forKey: "PlaqueIOUThreshold")
+        let plaqueNMSIOUThreshold = defaults.double(forKey: "PlaqueNMSIOUThreshold")
+        confThreshold = (plaqueConfThreshold != 0.0 ? plaqueConfThreshold : 0.85)
+        iouThreshold = (plaqueIOUThreshold != 0.0 ? plaqueIOUThreshold : 0.85)
+        nmsIOUThreshold = (plaqueNMSIOUThreshold != 0.0 ? plaqueNMSIOUThreshold : 0.65)
         
         self.textView.text = "Detecting plaques..."
         self.backToAssayButton.isHidden = true
