@@ -64,35 +64,6 @@ extension UIImage {
         return scaledImage!
     }
     
-//    func tileImage(row: Int, column: Int) -> [[UIImage]] {
-//        var tileArray = [[UIImage]]()
-//        
-//        let height = self.size.height /  CGFloat (row) //height of each image tile
-//        let width = self.size.width  / CGFloat (column)  //width of each image tile
-//
-//        let scale = self.scale //scale conversion factor is needed as UIImage make use of "points" whereas CGImage use pixels.
-//
-//        for y in 0..<row{
-//            var yArr = [UIImage]()
-//            for x in 0..<column{
-//
-//                UIGraphicsBeginImageContextWithOptions(
-//                    CGSize(width:width, height:height),
-//                    false, 0)
-//                if let i =  self.cgImage?.cropping(to:  CGRect.init(x: CGFloat(x) * width * scale, y:  CGFloat(y) * height * scale  , width: (width * scale) , height: (height * scale)) ) {
-//                    let newImg = UIImage.init(cgImage: i, scale: scale, orientation: self.imageOrientation).scaled(to: CGSize(width: 416, height: 416), scalingMode: .aspectFit)
-//
-//                    
-//                    yArr.append(newImg)
-//                }
-//
-//                UIGraphicsEndImageContext();
-//            }
-//            tileArray.append(yArr)
-//        }
-//        return tileArray
-//    }
-    
     func tileImageDynamically(networkSize: CGFloat) -> ([Tile], [Tile], [Tile], CGFloat, CGFloat, Int, Int) {
         let correctedImg = removeRotationForImage(image: self)
         
@@ -238,6 +209,7 @@ extension CGImagePropertyOrientation {
             case .leftMirrored: self = .leftMirrored
             case .right: self = .right
             case .rightMirrored: self = .rightMirrored
+            @unknown default: fatalError("Unknown orientation detected, cannot proceed")
         }
     }
 }

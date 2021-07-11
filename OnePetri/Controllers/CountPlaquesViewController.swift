@@ -238,10 +238,7 @@ class CountPlaquesViewController: UIViewController {
         let scaleX = actualImageBounds.width / petriDishImage.size.width
         let scaleY = actualImageBounds.height / petriDishImage.size.height
         
-        let imgShrinkFactor = imageView.frameForImageInImageViewAspectFit().size.height/imageView.image!.size.height
-        let offsetY = (currentTile.tileCoords.size.height * currentTile.locRowColumn.y * imgShrinkFactor * 2.0)
-        let extraOffsetY: CGFloat = 3.0 //15 for my iphone 12 pro
-        //TODO: WHERE DOES 15 COME FROM?? IT VARIES PER IMG, SOMETIMES +, SOMETIMES -, SOMETIMES 0 - depends on device + img
+        //TODO: OFFSET VARIES PER IMG, SOMETIMES +, SOMETIMES -, SOMETIMES 0 - depends on device + img
         
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
@@ -258,8 +255,6 @@ class CountPlaquesViewController: UIViewController {
                     .applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
                     .applying(CGAffineTransform(translationX: (self.imageView.bounds.width-actualImageBounds.size.width)/2, y: 73))
                 
-//                VNImageRectForNormalizedRectUsingRegionOfInterest(objectObservation.boundingBox, Int(actualImageBounds.width), Int(actualImageBounds.height), roi).applying(transformVerticalAxis.translatedBy(x: (self.imageView.bounds.width-actualImageBounds.size.width)/2, y: -view.safeAreaInsets.top-offsetY+extraOffsetY))
-                
                 let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds, color: [1.0, 0.0, 0.0])
                 detectionOverlay.addSublayer(shapeLayer)
                 
@@ -272,23 +267,17 @@ class CountPlaquesViewController: UIViewController {
                     .applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
                     .applying(CGAffineTransform(translationX: (self.imageView.bounds.width-actualImageBounds.size.width)/2 + 18, y: 73))
                 
-//                VNImageRectForNormalizedRectUsingRegionOfInterest(objectObservation.boundingBox, Int(actualImageBounds.width), Int(actualImageBounds.height), roi).applying(transformVerticalAxis.translatedBy(x: (self.imageView.bounds.width-actualImageBounds.size.width)/2, y: -view.safeAreaInsets.top-offsetY+extraOffsetY))
-                
                 let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds, color: [1.0, 0.0, 0.0])
                 detectionOverlay.addSublayer(shapeLayer)
                 
                 colExtraPlaqueArray.append(Plaque(petriDish: petriDish, locInLayer: shapeLayer.bounds, plaqueLayer: shapeLayer))
                 
-            case .rowExtraTile:
-                let localOffsetY = (offsetY * 2) + (imgShrinkFactor * tileHeight)
-                
+            case .rowExtraTile:                
                 let tempBox = VNImageRectForNormalizedRect(objectObservation.boundingBox, Int(tileWidth), Int(tileHeight/2)).applying(transformVerticalAxis)
                 // TODO: FIX DY
                 let objectBounds = tempBox.offsetBy(dx: currentTile.locRowColumn.x * tileWidth, dy: currentTile.locRowColumn.y * tileHeight + tileHeight/2)
                     .applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
                     .applying(CGAffineTransform(translationX: (self.imageView.bounds.width-actualImageBounds.size.width)/2, y: 73 - 18))
-                
-//                VNImageRectForNormalizedRectUsingRegionOfInterest(objectObservation.boundingBox, Int(actualImageBounds.width), Int(actualImageBounds.height), roi).applying(transformVerticalAxis.translatedBy(x: (self.imageView.bounds.width-actualImageBounds.size.width)/2, y: -view.safeAreaInsets.top-localOffsetY+extraOffsetY))
                 
                 let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds, color: [1.0, 0.0, 0.0])
                 detectionOverlay.addSublayer(shapeLayer)
