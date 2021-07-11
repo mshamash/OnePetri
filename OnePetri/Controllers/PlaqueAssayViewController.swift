@@ -19,6 +19,7 @@ class PlaqueAssayViewController: UIViewController, UITextFieldDelegate {
     let assaySelection: Assay = .plaque
     var currentPlateID: Int?
     
+    var numberPlates = 1
     var plates = [Int: PetriDish]()
     var concentrations = [Int: String]()
     var meanConcentration = ""
@@ -36,12 +37,27 @@ class PlaqueAssayViewController: UIViewController, UITextFieldDelegate {
         dilutionSeriesTableView.reloadData()
     }
     
-    @IBAction func plateValueChanged(_ sender: UIStepper) {
-        //TODO: add code to delete plates that are hidden from tableview and recalculate average PFUs accordingly, as well as update [concentrations] dictionary
+    @IBAction func plateValueChanged(_ sender: UIStepper) {        
+        let stepperValue = Int(sender.value)
         
-        let s = (sender.value == 1) ?  "" : "s"
-        plateCountLabel.text = "\(Int(sender.value)) plate\(s)"
+        let x = plates
+        let y = concentrations
+        let z = numberPlates
         
+        if numberPlates > stepperValue {
+            // stepper decreased in value, add 1 to get value before decrement
+            let isKeyValid = plates[stepperValue + 1] != nil
+            if isKeyValid { plates[stepperValue + 1] = nil; concentrations[stepperValue] = nil }
+        } else {
+            // stepper increased in value, nothing special to do
+        }
+        
+        numberPlates = stepperValue
+        
+        let s = (numberPlates == 1) ?  "" : "s"
+        plateCountLabel.text = "\(numberPlates) plate\(s)"
+        
+        calculateConcentration()
         dilutionSeriesTableView.reloadData()
     }
 
@@ -57,6 +73,7 @@ class PlaqueAssayViewController: UIViewController, UITextFieldDelegate {
     func resetPlaqueAssay() {
         plates = [Int: PetriDish]()
         concentrations = [Int: String]()
+        numberPlates = 1
         meanConcentration = ""
         volumePlated = 100.0
         
@@ -117,7 +134,7 @@ extension PlaqueAssayViewController: UITableViewDelegate, UITableViewDataSource 
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Int(plateStepper.value)
+        return Int(numberPlates)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
