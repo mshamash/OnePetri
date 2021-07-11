@@ -34,17 +34,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFl-64-raQ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFl-64-raQ">
                                 <rect key="frame" x="20" y="133" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.92069655660000005" green="0.38446450230000001" blue="0.34315872190000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="5RA-WL-1kT"/>
                                     <constraint firstAttribute="height" constant="50" id="SrL-BR-EnD"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal">
+                                <state key="normal" image="trash.fill" catalog="system">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="bold"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -235,17 +235,17 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="3cf-05-fQB">
                                         <rect key="frame" x="19.666666666666671" y="36.333333333333314" width="130" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTm-Ev-waW">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTm-Ev-waW">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <color key="backgroundColor" red="0.35236489770000001" green="0.68177992109999996" blue="0.76936048270000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="BhN-VC-Xs1"/>
                                                     <constraint firstAttribute="height" constant="50" id="zwS-gW-gF6"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal">
+                                                <state key="normal" image="photo.on.rectangle.angled" catalog="system">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="bold"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -256,17 +256,17 @@
                                                     <action selector="selectPhotoPressed:" destination="kxU-si-2fA" eventType="touchUpInside" id="GJK-9b-mob"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pAb-QT-yTh">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pAb-QT-yTh">
                                                 <rect key="frame" x="79.999999999999986" y="0.0" width="50.000000000000014" height="50"/>
                                                 <color key="backgroundColor" red="0.35236489770000001" green="0.68177992109999996" blue="0.76936048270000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="e1G-he-koF"/>
                                                     <constraint firstAttribute="height" constant="50" id="f6f-ba-lsZ"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <state key="normal">
+                                                <state key="normal" image="camera.fill" catalog="system">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="bold"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -353,17 +353,17 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlZ-dg-28c">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlZ-dg-28c">
                                 <rect key="frame" x="312" y="715" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.33314409849999999" green="0.33313721419999998" blue="0.33314189309999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="5cD-WR-e5W"/>
                                     <constraint firstAttribute="width" constant="50" id="gN2-oM-C5q"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal">
+                                <state key="normal" image="gearshape" catalog="system">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="bold"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -374,10 +374,10 @@
                                     <action selector="didTapSettings:" destination="kxU-si-2fA" eventType="touchUpInside" id="oOE-Jf-Imk"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 1.0.0-b1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcy-8z-i9q">
-                                <rect key="frame" x="13.000000000000007" y="744.66666666666663" width="120.66666666666669" height="20.333333333333371"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version 0.0.0-b0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcy-8z-i9q">
+                                <rect key="frame" x="12.999999999999993" y="744.66666666666663" width="126.33333333333331" height="20.333333333333371"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" red="0.43431191929836865" green="0.43431191929836865" blue="0.43431191929836865" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test" translatesAutoresizingMaskIntoConstraints="NO" id="yVy-S1-GIQ">
@@ -415,6 +415,7 @@
                         <outlet property="cameraButton" destination="pAb-QT-yTh" id="KD6-76-NeY"/>
                         <outlet property="photoLibraryButton" destination="gTm-Ev-waW" id="ort-jm-boa"/>
                         <outlet property="settingsButton" destination="jlZ-dg-28c" id="J2c-Mp-qXk"/>
+                        <outlet property="versionLabel" destination="Fcy-8z-i9q" id="NsY-O4-lig"/>
                         <segue destination="56S-ha-ftv" kind="show" identifier="toSettingsVC" id="kMA-gA-qak"/>
                         <segue destination="afd-Kx-fQo" kind="show" identifier="toSelectVC" id="kzu-LM-hWX"/>
                         <segue destination="0t2-7r-Y73" kind="show" identifier="toPlaqueAssayVC" id="7hs-3C-Uar"/>
@@ -452,17 +453,17 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ydf-PQ-WQc">
                                 <rect key="frame" x="82.666666666666686" y="718" width="210" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ef7-mR-Ut6">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ef7-mR-Ut6">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <color key="backgroundColor" red="0.35236489770000001" green="0.68177992109999996" blue="0.76936048270000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="40W-hp-gLC"/>
                                             <constraint firstAttribute="height" constant="50" id="rVu-eP-nlJ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal">
+                                        <state key="normal" image="photo.on.rectangle.angled" catalog="system">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="bold"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -473,17 +474,17 @@
                                             <action selector="selectPhotoPressed:" destination="afd-Kx-fQo" eventType="touchUpInside" id="A9w-c9-Sz9"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="toM-OA-yOA">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="toM-OA-yOA">
                                         <rect key="frame" x="79.999999999999986" y="0.0" width="50.000000000000014" height="50"/>
                                         <color key="backgroundColor" red="0.35236489770000001" green="0.68177992109999996" blue="0.76936048270000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="BbO-7X-Mqq"/>
                                             <constraint firstAttribute="width" constant="50" id="eeK-Ih-SX6"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal">
+                                        <state key="normal" image="camera.fill" catalog="system">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="bold"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -494,17 +495,17 @@
                                             <action selector="selectPhotoPressed:" destination="afd-Kx-fQo" eventType="touchUpInside" id="r4e-hj-o92"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tB0-nB-NCJ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tB0-nB-NCJ">
                                         <rect key="frame" x="160" y="0.0" width="50" height="50"/>
                                         <color key="backgroundColor" red="0.92069655660000005" green="0.38446450230000001" blue="0.34315872190000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Ct6-Yz-1ee"/>
                                             <constraint firstAttribute="height" constant="50" id="tm8-GJ-udI"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal">
+                                        <state key="normal" image="questionmark.circle" catalog="system">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="bold"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -587,53 +588,81 @@
                                     <constraint firstAttribute="width" secondItem="nZh-gA-yUQ" secondAttribute="height" multiplier="1:1" id="WuB-oS-hoK"/>
                                 </constraints>
                             </imageView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPm-tw-Yt9">
-                                <rect key="frame" x="105" y="698" width="165" height="55"/>
-                                <color key="backgroundColor" red="0.34509803921568627" green="0.33686596159999999" blue="0.80864340069999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="QIQ-Lc-srk"/>
-                                    <constraint firstAttribute="width" constant="165" id="b09-80-UKv"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Add plate to assay">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="6"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="backToAssayPressed:" destination="CNy-Lf-DE6" eventType="touchUpInside" id="d5Z-4q-TDP"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="Detecting plaques..." textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMW-xS-PIZ">
-                                <rect key="frame" x="15" y="493" width="345" height="200"/>
+                                <rect key="frame" x="15" y="493" width="345" height="220"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Jnp-z3-j2L">
+                                <rect key="frame" x="65" y="718" width="245" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPm-tw-Yt9">
+                                        <rect key="frame" x="0.0" y="0.0" width="165" height="50"/>
+                                        <color key="backgroundColor" red="0.34509803921568627" green="0.33686596159999999" blue="0.80864340069999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="QIQ-Lc-srk"/>
+                                            <constraint firstAttribute="width" constant="165" id="b09-80-UKv"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Add plate to assay">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="backToAssayPressed:" destination="CNy-Lf-DE6" eventType="touchUpInside" id="d5Z-4q-TDP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2W6-nE-Jmj">
+                                        <rect key="frame" x="195" y="0.0" width="50" height="50"/>
+                                        <color key="backgroundColor" red="0.92069655660000005" green="0.38446450230000001" blue="0.34315872190000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="T0l-Pz-JIl"/>
+                                            <constraint firstAttribute="height" constant="50" id="y3O-zt-PkL"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="questionmark.circle" catalog="system">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20" scale="large" weight="bold"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="didTapHelp:" destination="CNy-Lf-DE6" eventType="touchUpInside" id="AC6-JI-UHt"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LeC-Qm-SNZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="sMW-xS-PIZ" firstAttribute="leading" secondItem="LeC-Qm-SNZ" secondAttribute="leading" constant="15" id="162-Eg-XRX"/>
+                            <constraint firstItem="Jnp-z3-j2L" firstAttribute="top" secondItem="sMW-xS-PIZ" secondAttribute="bottom" constant="5" id="2sh-P9-Apx"/>
                             <constraint firstItem="nZh-gA-yUQ" firstAttribute="leading" secondItem="LeC-Qm-SNZ" secondAttribute="leading" constant="5" id="3ac-G7-vGW"/>
                             <constraint firstItem="sMW-xS-PIZ" firstAttribute="top" secondItem="nZh-gA-yUQ" secondAttribute="bottom" constant="25" id="6TS-fc-5Yx"/>
                             <constraint firstItem="LeC-Qm-SNZ" firstAttribute="trailing" secondItem="nZh-gA-yUQ" secondAttribute="trailing" constant="5" id="CMQ-6g-9om"/>
-                            <constraint firstItem="GPm-tw-Yt9" firstAttribute="top" secondItem="sMW-xS-PIZ" secondAttribute="bottom" constant="5" id="CbS-43-0Ze"/>
                             <constraint firstItem="LeC-Qm-SNZ" firstAttribute="trailing" secondItem="sMW-xS-PIZ" secondAttribute="trailing" constant="15" id="YhE-5u-sQ8"/>
+                            <constraint firstItem="Jnp-z3-j2L" firstAttribute="centerX" secondItem="x7p-sr-zyR" secondAttribute="centerX" id="eV0-H7-kgT"/>
                             <constraint firstItem="nZh-gA-yUQ" firstAttribute="top" secondItem="LeC-Qm-SNZ" secondAttribute="top" constant="15" id="jnl-b0-0AS"/>
-                            <constraint firstItem="LeC-Qm-SNZ" firstAttribute="bottom" secondItem="GPm-tw-Yt9" secondAttribute="bottom" constant="25" id="scw-WT-Tuf"/>
-                            <constraint firstItem="GPm-tw-Yt9" firstAttribute="centerX" secondItem="x7p-sr-zyR" secondAttribute="centerX" id="v9k-TF-qE2"/>
+                            <constraint firstItem="LeC-Qm-SNZ" firstAttribute="bottom" secondItem="Jnp-z3-j2L" secondAttribute="bottom" constant="10" id="yXT-HG-yfo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Plaque Counts" id="uBh-9J-bly"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="backToAssayButton" destination="GPm-tw-Yt9" id="qsM-UB-nhv"/>
+                        <outlet property="helpButton" destination="2W6-nE-Jmj" id="Xxf-K1-eDu"/>
                         <outlet property="imageView" destination="nZh-gA-yUQ" id="kra-gV-hIY"/>
                         <outlet property="textView" destination="sMW-xS-PIZ" id="lQA-YT-dqh"/>
                     </connections>
@@ -647,7 +676,12 @@
         <segue reference="kzu-LM-hWX"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="camera.fill" catalog="system" width="128" height="94"/>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
+        <image name="photo.on.rectangle.angled" catalog="system" width="128" height="101"/>
+        <image name="questionmark.circle" catalog="system" width="128" height="121"/>
         <image name="test" width="2019" height="2040"/>
+        <image name="trash.fill" catalog="system" width="121" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

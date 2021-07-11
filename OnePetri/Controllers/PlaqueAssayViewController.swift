@@ -27,10 +27,6 @@ class PlaqueAssayViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .large)
-        let resetIcon = UIImage(systemName: "trash", withConfiguration: largeConfig)
-        resetButton.setImage(resetIcon, for: .normal)
-        
         volumeTextField.addDoneButtonToKeyboard(dismissAction: #selector(volumeTextField.resignFirstResponder))
     }
     

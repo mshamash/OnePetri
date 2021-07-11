@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MessageUI
 
 
 extension UITextField {
@@ -24,5 +25,24 @@ extension UITextField {
      doneToolbar.sizeToFit()
      
      self.inputAccessoryView = doneToolbar
+    }
+}
+
+extension UIViewController: MFMailComposeViewControllerDelegate {
+    func sendMail(imageView: UIImageView, imageType: String) {
+      if MFMailComposeViewController.canSendMail() {
+        let mail = MFMailComposeViewController()
+        mail.mailComposeDelegate = self;
+        mail.setToRecipients(["michael@onepetri.ai"])
+        mail.setSubject("Image submission - \(imageType)")
+        mail.setMessageBody("Submitted using OnePetri, version \(appVersion)-\(appBuild)", isHTML: false)
+        let imageData = imageView.image!.pngData()!
+        mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "image.png")
+        present(mail, animated: true, completion: nil)
+      }
+    }
+    
+    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }

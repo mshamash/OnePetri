@@ -39,14 +39,6 @@ class SelectImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .large)
-        let largeQuestionMark = UIImage(systemName: "questionmark.circle", withConfiguration: largeConfig)
-        let largePhoto = UIImage(systemName: "photo.on.rectangle.angled", withConfiguration: largeConfig)
-        let largeCamera = UIImage(systemName: "camera.fill", withConfiguration: largeConfig)
-        helpButton.setImage(largeQuestionMark, for: .normal)
-        photoLibraryButton.setImage(largePhoto, for: .normal)
-        cameraButton.setImage(largeCamera, for: .normal)
-        
         // setup Vision parts
         setupLayers()
         updateLayerGeometry()
@@ -108,13 +100,14 @@ class SelectImageViewController: UIViewController {
     }
     
     @IBAction func didTapHelp(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Missing petri dish?", message: "If a petri dish was not detected, you may submit the selected image for incorporation into future iterations of the app's AI models. Would you like to submit this image for analysis?", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "Missing petri dish?", message: "If a petri dish was not detected, you may submit the selected image to help improve future iterations of OnePetri's AI models. Would you like to submit this image for analysis?", preferredStyle: .actionSheet)
         
-        alert.addAction(UIAlertAction(title: "Send Image", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Send Image", style: .default, handler: { _ in
+            self.sendMail(imageView: self.imageView, imageType: "petri dish")
+        }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alert, animated: true)
-
     }
   
     // MARK: - Actions

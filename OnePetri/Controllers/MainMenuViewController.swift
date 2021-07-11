@@ -9,7 +9,11 @@ import UIKit
 
 enum Assay { case quick, plaque, adsorption, eop }
 
+let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+let appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+
 class MainMenuViewController: UIViewController {
+    @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var photoLibraryButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
@@ -19,14 +23,8 @@ class MainMenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .large)
-        let largeGear = UIImage(systemName: "gearshape", withConfiguration: largeConfig)
-        let largePhoto = UIImage(systemName: "photo.on.rectangle.angled", withConfiguration: largeConfig)
-        let largeCamera = UIImage(systemName: "camera.fill", withConfiguration: largeConfig)
-        settingsButton.setImage(largeGear, for: .normal)
-        photoLibraryButton.setImage(largePhoto, for: .normal)
-        cameraButton.setImage(largeCamera, for: .normal)
+        
+        versionLabel.text = "Version \(appVersion)-\(appBuild)"
     }
     
     override func viewWillAppear(_ animated: Bool) {
