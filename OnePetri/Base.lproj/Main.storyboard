@@ -388,7 +388,7 @@
                                 <color key="textColor" red="0.43431191929836865" green="0.43431191929836865" blue="0.43431191929836865" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test" translatesAutoresizingMaskIntoConstraints="NO" id="yVy-S1-GIQ">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yVy-S1-GIQ">
                                 <rect key="frame" x="145" y="69" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="yVy-S1-GIQ" secondAttribute="height" multiplier="1:1" id="Ff2-2G-J4p"/>
@@ -921,7 +921,6 @@
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="photo.on.rectangle.angled" catalog="system" width="128" height="101"/>
         <image name="questionmark.circle" catalog="system" width="128" height="121"/>
-        <image name="test" width="2019" height="2040"/>
         <image name="trash.fill" catalog="system" width="121" height="128"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
