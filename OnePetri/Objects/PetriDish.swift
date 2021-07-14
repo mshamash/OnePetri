@@ -13,7 +13,7 @@ import UIKit
 class PetriDish {
     var locInView: CGRect
     var locInImg: CGRect
-    var croppedPetriImg: UIImage!
+    var croppedPetriImg: UIImage
     var plaques: [Plaque] = [Plaque]()
     
     init(locInView: CGRect, locInImg: CGRect, croppedPetriImg: UIImage) {
