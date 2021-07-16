@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 enum Assay { case quick, plaque, adsorption, eop }
 
@@ -44,11 +45,42 @@ class MainMenuViewController: UIViewController {
         picker.delegate = self
         if sender.tag == 0 {
             picker.sourceType = .photoLibrary
+            picker.modalPresentationStyle = .overFullScreen
+            present(picker, animated: true)
         } else if sender.tag == 1 {
-            picker.sourceType = .camera
+            if AVCaptureDevice.authorizationStatus(for: .video) ==  .authorized {
+                //already authorized
+                picker.sourceType = .camera
+                picker.modalPresentationStyle = .overFullScreen
+                present(picker, animated: true)
+                print("auth")
+            } else {
+                AVCaptureDevice.requestAccess(for: .video, completionHandler: { (granted: Bool) in
+                    if granted {
+                        //access allowed
+                        print("granted")
+                        DispatchQueue.main.async {
+                            picker.sourceType = .camera
+                            picker.modalPresentationStyle = .overFullScreen
+                            self.present(picker, animated: true)
+                        }
+                    } else {
+                        //access denied
+                        DispatchQueue.main.async {
+                            let alert = UIAlertController(title: "Camera access disabled", message: "It looks like camera access for OnePetri has been disabled. Please enable access in iOS Settings if you wish to use the camera to take photos for analysis within OnePetri.", preferredStyle: .alert)
+                        
+                        alert.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
+                            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                        }))
+                        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+                        
+                        self.present(alert, animated: true)
+                        }
+                    }
+                })
+            }
         }
-        picker.modalPresentationStyle = .overFullScreen
-        present(picker, animated: true)
+        
     }
     
     @IBAction func didChooseAssay(_ sender: UIButton) {
