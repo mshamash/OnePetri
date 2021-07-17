@@ -19,7 +19,7 @@
 		4C98A36A269A657F00A20495 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A365269A657F00A20495 /* SettingsViewController.swift */; };
 		4C98A36F269A659100A20495 /* ModelFeatureProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A36C269A659100A20495 /* ModelFeatureProvider.swift */; };
 		4C98A370269A659100A20495 /* Yv5-petri-res320_epoch500_v4.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A36D269A659100A20495 /* Yv5-petri-res320_epoch500_v4.mlmodel */; };
-		4C98A371269A659100A20495 /* plaque-res416_epochs500_bat128_v5-1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A36E269A659100A20495 /* plaque-res416_epochs500_bat128_v5-1.mlmodel */; };
+		4C98A371269A659100A20495 /* Yv5-plaque-res416_epochs500_bat128_v5-1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A36E269A659100A20495 /* Yv5-plaque-res416_epochs500_bat128_v5-1.mlmodel */; };
 		4C98A376269A659A00A20495 /* PetriDish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A373269A659A00A20495 /* PetriDish.swift */; };
 		4C98A377269A659A00A20495 /* Plaque.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A374269A659A00A20495 /* Plaque.swift */; };
 		4C98A378269A659A00A20495 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A375269A659A00A20495 /* Tile.swift */; };
@@ -42,7 +42,7 @@
 		4C98A365269A657F00A20495 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		4C98A36C269A659100A20495 /* ModelFeatureProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelFeatureProvider.swift; sourceTree = "<group>"; };
 		4C98A36D269A659100A20495 /* Yv5-petri-res320_epoch500_v4.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "Yv5-petri-res320_epoch500_v4.mlmodel"; sourceTree = "<group>"; };
-		4C98A36E269A659100A20495 /* plaque-res416_epochs500_bat128_v5-1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "plaque-res416_epochs500_bat128_v5-1.mlmodel"; sourceTree = "<group>"; };
+		4C98A36E269A659100A20495 /* Yv5-plaque-res416_epochs500_bat128_v5-1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "Yv5-plaque-res416_epochs500_bat128_v5-1.mlmodel"; sourceTree = "<group>"; };
 		4C98A373269A659A00A20495 /* PetriDish.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetriDish.swift; sourceTree = "<group>"; };
 		4C98A374269A659A00A20495 /* Plaque.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plaque.swift; sourceTree = "<group>"; };
 		4C98A375269A659A00A20495 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 			children = (
 				4C98A36C269A659100A20495 /* ModelFeatureProvider.swift */,
 				4C98A36D269A659100A20495 /* Yv5-petri-res320_epoch500_v4.mlmodel */,
-				4C98A36E269A659100A20495 /* plaque-res416_epochs500_bat128_v5-1.mlmodel */,
+				4C98A36E269A659100A20495 /* Yv5-plaque-res416_epochs500_bat128_v5-1.mlmodel */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -200,7 +200,7 @@
 				4C98A37B269A65A500A20495 /* ImageExtensions.swift in Sources */,
 				4C98A368269A657F00A20495 /* MainMenuViewController.swift in Sources */,
 				4C98A37C269A65A500A20495 /* OtherExtensions.swift in Sources */,
-				4C98A371269A659100A20495 /* plaque-res416_epochs500_bat128_v5-1.mlmodel in Sources */,
+				4C98A371269A659100A20495 /* Yv5-plaque-res416_epochs500_bat128_v5-1.mlmodel in Sources */,
 				4C98A370269A659100A20495 /* Yv5-petri-res320_epoch500_v4.mlmodel in Sources */,
 				4C98A378269A659A00A20495 /* Tile.swift in Sources */,
 				4C98A366269A657F00A20495 /* CountPlaquesViewController.swift in Sources */,
@@ -359,7 +359,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = H7C3AE5HUF;
 				INFOPLIST_FILE = OnePetri/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -380,7 +380,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = H7C3AE5HUF;
 				INFOPLIST_FILE = OnePetri/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

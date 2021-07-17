@@ -69,11 +69,6 @@ class CountPlaquesViewController: UIViewController {
         tilesPerCol = tileTuple.5
         tilesPerRow = tileTuple.6
         
-//        print(tileWidth!)
-//        print(tileHeight!)
-//        print(tilesPerCol!)
-//        print(tilesPerRow!)
-        
         // setup Vision parts
         setupLayers()
         updateLayerGeometry()
@@ -86,7 +81,6 @@ class CountPlaquesViewController: UIViewController {
                 self.detectPlaques(tiles: self.rowExtraTileArray) {
                     print("Done extra row tiles!")
                     self.nonMaximumSuppression()
-//                    self.summarizePlaques()
                     DispatchQueue.main.async{
                         if self.assaySelection != .quick { self.backToAssayButton.isHidden = false }
                         self.helpButton.isHidden = false
@@ -123,10 +117,6 @@ class CountPlaquesViewController: UIViewController {
             print("mainPlaqueArray count is: \(mainPlaqueArray.count)")
             print("colExtraPlaqueArray plaque array count is: \(colExtraPlaqueArray.count)")
             print("rowExtraPlaqueArray plaque array count is: \(rowExtraPlaqueArray.count)")
-            
-//            DispatchQueue.main.async {
-//                self.textView.text = "\(self.mainPlaqueArray.count) mainPlaque(s) detected. \nDEBUG: \(self.colExtraPlaqueArray.count) colExtraPlaque(s) detected. \nDEBUG: \(self.rowExtraPlaqueArray.count) rowExtraPlaque(s) detected."
-//            }
         }
         print("===== END OF PLAQUE COUNTS =====")
     }
@@ -210,7 +200,7 @@ class CountPlaquesViewController: UIViewController {
         // Setup Vision parts
         let error: NSError! = nil
         
-        guard let modelURL = Bundle.main.url(forResource: "plaque-res416_epochs500_bat128_v5-1", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle.main.url(forResource: "Yv5-plaque-res416_epochs500_bat128_v5-1", withExtension: "mlmodelc") else {
             return NSError(domain: "VisionObjectRecognitionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "Model file is missing"])
         }
         
@@ -235,12 +225,6 @@ class CountPlaquesViewController: UIViewController {
     }
     
     func drawVisionRequestResults(_ results: [Any]) {
-        
-        // draw first row of tiles and stop
-//        if currentTile.tileCoords.origin.y > 0 {
-//            return
-//        }
-        
         let transformVerticalAxis = CGAffineTransform(scaleX: 1, y: -1)
         
         actualImageBounds = imageView.frameForImageInImageViewAspectFit()
@@ -329,7 +313,7 @@ class CountPlaquesViewController: UIViewController {
         let shapeLayer = CALayer()
         shapeLayer.bounds = bounds
         shapeLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
-        shapeLayer.name = "Found Object"
+        shapeLayer.name = "plaque"
         shapeLayer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [color[0], color[1], color[2], 0.15])
         shapeLayer.borderColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [color[0], color[1], color[2], 0.9])
         shapeLayer.borderWidth = 0.5
