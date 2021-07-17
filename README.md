@@ -27,7 +27,7 @@ michael@onepetri.ai
 ---
 
 ## Changelog <a name="changelog"></a>
-The full changelog for OnePetri (iOS) can be found [here](https://onepetri.ai/changelog/) or on the releases page [here]().
+The full changelog for OnePetri (iOS) can be found [here](https://onepetri.ai/changelog/) or on the releases page [here](https://github.com/mshamash/OnePetri/releases).
 
 
 ## App Description <a name="about"></a>
