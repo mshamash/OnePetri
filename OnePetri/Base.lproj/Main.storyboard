@@ -678,7 +678,13 @@
                             <constraint firstItem="vzH-xO-4hN" firstAttribute="top" secondItem="wRP-UL-Q7D" secondAttribute="top" constant="25" id="wVj-8g-hgZ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Settings" id="lWg-lj-RQG"/>
+                    <navigationItem key="navigationItem" title="Settings" id="lWg-lj-RQG">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="info.circle" catalog="system" id="rtx-ib-ift">
+                            <connections>
+                                <action selector="didTapInfo:" destination="56S-ha-ftv" id="Imi-dE-ZIu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="appVersionLabel" destination="IhB-nG-6ey" id="cDy-Vo-RuG"/>
@@ -940,6 +946,7 @@
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="envelope.fill" catalog="system" width="128" height="93"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="logo" width="864" height="879"/>
         <image name="photo.on.rectangle.angled" catalog="system" width="128" height="101"/>
         <image name="questionmark.circle" catalog="system" width="128" height="121"/>

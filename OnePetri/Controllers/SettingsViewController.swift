@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class SettingsViewController: UIViewController {
     @IBOutlet weak var petriConfTextField: UITextField!
@@ -50,6 +51,12 @@ class SettingsViewController: UIViewController {
     
     @IBAction func didTapContribute(_ sender: UIButton) {
         self.sendMail(imageMail: false)
+    }
+    
+    @IBAction func didTapInfo(_ sender: UIBarButtonItem) {        
+        let svc = SFSafariViewController(url: URL(string:"https://onepetri.ai/thresholds/")!)
+        svc.dismissButtonStyle = .close
+        self.present(svc, animated: true, completion: nil)
     }
 
 }
