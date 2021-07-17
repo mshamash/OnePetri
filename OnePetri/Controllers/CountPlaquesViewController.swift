@@ -50,9 +50,9 @@ class CountPlaquesViewController: UIViewController {
         let plaqueConfThreshold = defaults.double(forKey: "PlaqueConfThreshold")
         let plaqueIOUThreshold = defaults.double(forKey: "PlaqueIOUThreshold")
         let plaqueNMSIOUThreshold = defaults.double(forKey: "PlaqueNMSIOUThreshold")
-        confThreshold = (plaqueConfThreshold != 0.0 ? plaqueConfThreshold : 0.85)
+        confThreshold = (plaqueConfThreshold != 0.0 ? plaqueConfThreshold : 0.70)
         iouThreshold = (plaqueIOUThreshold != 0.0 ? plaqueIOUThreshold : 0.85)
-        nmsIOUThreshold = (plaqueNMSIOUThreshold != 0.0 ? plaqueNMSIOUThreshold : 0.65)
+        nmsIOUThreshold = (plaqueNMSIOUThreshold != 0.0 ? plaqueNMSIOUThreshold : 0.55)
         
         self.textView.text = "Detecting plaques..."
         self.backToAssayButton.isHidden = true
