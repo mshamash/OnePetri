@@ -88,23 +88,30 @@ class SelectImageViewController: UIViewController {
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         let loc = tapGestureRecognizer.location(in: view)
-//        let normLoc = CGPoint(x: loc.x-imageViewLeadingConstraint.constant, y: loc.y-imageViewTopPaddingConstraint.constant)
         let normLoc = CGPoint(x: loc.x-imageViewLeadingConstraint.constant, y: loc.y-view.safeAreaInsets.top)
+        
+        var petriDishesInTap = [PetriDish]()
         
         for petriDish in petriDetections {
             if petriDish.locInView.contains(normLoc) {
-                let croppedImage = petriDish.croppedPetriImg
-                
-                self.imgToProcess = croppedImage
-                self.petriToProcess = petriDish
-                
-                
-                if let plaqueAssayVC = plaqueAssayViewConroller, let plateID = assayPlateID {
-                    plaqueAssayVC.plates[plateID] = petriDish
-                }
-                
-                self.performSegue(withIdentifier: "toCountVC", sender: self)
+                petriDishesInTap.append(petriDish)
             }
+        }
+        
+        // make sure tap is within 1 bounding box region only, otherwise do nothing
+        if petriDishesInTap.count == 1 {
+            let petriDish = petriDishesInTap[0]
+            let croppedImage = petriDish.croppedPetriImg
+            
+            self.imgToProcess = croppedImage
+            self.petriToProcess = petriDish
+            
+            
+            if let plaqueAssayVC = plaqueAssayViewConroller, let plateID = assayPlateID {
+                plaqueAssayVC.plates[plateID] = petriDish
+            }
+            
+            self.performSegue(withIdentifier: "toCountVC", sender: self)
         }
     }
     
