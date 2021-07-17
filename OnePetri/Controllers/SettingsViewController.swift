@@ -19,7 +19,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var petriModelVersionLabel: UILabel!
     @IBOutlet weak var plaqueModelVersionLabel: UILabel!
     
-    private var defaults:UserDefaults!
+    private var defaults: UserDefaults!
+    private var endEditing: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,19 +64,43 @@ class SettingsViewController: UIViewController {
 
 
 extension SettingsViewController: UITextFieldDelegate {
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
+        if endEditing {
+            if textField.tag == 0 {
+                if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PetriConfThreshold") } else { defaults.removeObject(forKey: "PetriConfThreshold") }
+            } else if textField.tag == 1 {
+                if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PetriIOUThreshold") } else { defaults.removeObject(forKey: "PetriIOUThreshold") }
+            } else if textField.tag == 2 {
+                if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PlaqueConfThreshold") } else { defaults.removeObject(forKey: "PlaqueConfThreshold") }
+            } else if textField.tag == 3 {
+                if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PlaqueIOUThreshold") } else { defaults.removeObject(forKey: "PlaqueIOUThreshold") }
+            } else if textField.tag == 4 {
+                if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PlaqueNMSIOUThreshold") } else { defaults.removeObject(forKey: "PlaqueNMSIOUThreshold") }
+            }
+        }
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        endEditing = true
         
-        if textField.tag == 0 {
-            if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PetriConfThreshold") } else { defaults.removeObject(forKey: "PetriConfThreshold") }
-        } else if textField.tag == 1 {
-            if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PetriIOUThreshold") } else { defaults.removeObject(forKey: "PetriIOUThreshold") }
-        } else if textField.tag == 2 {
-            if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PlaqueConfThreshold") } else { defaults.removeObject(forKey: "PlaqueConfThreshold") }
-        } else if textField.tag == 3 {
-            if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PlaqueIOUThreshold") } else { defaults.removeObject(forKey: "PlaqueIOUThreshold") }
-        } else if textField.tag == 4 {
-            if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PlaqueNMSIOUThreshold") } else { defaults.removeObject(forKey: "PlaqueNMSIOUThreshold") }
+        if let value = textField.text, !value.isEmpty {
+            if value.countInstances(of: ".") != 1 { endEditing = false }
+            
+            if value == "." { endEditing = false }
+            
+            let doubleVal = Double(value)
+            if doubleVal == 0.0 || doubleVal == 1.0 { endEditing = false }
         }
         
+        if !endEditing {
+            let alert = UIAlertController(title: "Invalid threshold", message: "The value entered should be between 0.00 and 1.00 (exclusively), or left empty to use the default value.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            
+            self.present(alert, animated: true)
+        }
+        
+        return true
     }
 }
