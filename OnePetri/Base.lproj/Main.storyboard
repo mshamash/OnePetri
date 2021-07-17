@@ -55,8 +55,8 @@
                                     <action selector="resetButtonPressed:" destination="0t2-7r-Y73" eventType="touchUpInside" id="AdY-gp-Wso"/>
                                 </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="5jQ-7P-SQa">
-                                <rect key="frame" x="129" y="118" width="170" height="310"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="5jQ-7P-SQa">
+                                <rect key="frame" x="119.66666666666669" y="118" width="189" height="310"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1 plate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtF-s5-ZKp">
                                         <rect key="frame" x="0.0" y="139" width="75" height="32"/>
@@ -69,7 +69,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" autorepeat="NO" value="1" minimumValue="1" maximumValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="nbU-Lk-u4w">
-                                        <rect key="frame" x="95" y="139" width="75" height="32"/>
+                                        <rect key="frame" x="95" y="139" width="94" height="32"/>
                                         <connections>
                                             <action selector="plateValueChanged:" destination="0t2-7r-Y73" eventType="valueChanged" id="b58-CM-3CJ"/>
                                         </connections>
@@ -940,7 +940,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kzu-LM-hWX"/>
+        <segue reference="Ve3-oV-RVy"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
