@@ -102,6 +102,8 @@ class CountPlaquesViewController: UIViewController {
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
+        alert.popoverPresentationController?.sourceView = helpButton
+        
         self.present(alert, animated: true)
     }
     
