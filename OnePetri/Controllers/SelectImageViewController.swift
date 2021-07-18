@@ -7,7 +7,6 @@
 
 import UIKit
 import Vision
-import AVFoundation
 
 class SelectImageViewController: UIViewController {
     @IBOutlet weak var photoLibraryButton: UIButton!

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import AVFoundation
+import SafariServices
 
 enum Assay { case quick, plaque, adsorption, eop }
 
@@ -59,6 +59,12 @@ class MainMenuViewController: UIViewController {
     
     @IBAction func didTapSettings(_ sender: UIButton) {
         self.performSegue(withIdentifier: "toSettingsVC", sender: self)
+    }
+    
+    @IBAction func didTapTips(_ sender: UIButton) {
+        let svc = SFSafariViewController(url: URL(string:"https://onepetri.ai/tips/")!)
+        svc.dismissButtonStyle = .close
+        self.present(svc, animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
