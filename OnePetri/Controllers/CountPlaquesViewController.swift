@@ -39,7 +39,7 @@ class CountPlaquesViewController: UIViewController {
     private let modelImgSize: CGFloat = 416.0
     private var confThreshold: Double!
     private var iouThreshold: Double!
-    private var nmsIOUThreshold: Double!
+//    private var nmsIOUThreshold: Double!
     
     private var actualImageBounds: CGRect!
     
@@ -49,10 +49,10 @@ class CountPlaquesViewController: UIViewController {
         let defaults = UserDefaults.standard
         let plaqueConfThreshold = defaults.double(forKey: "PlaqueConfThreshold")
         let plaqueIOUThreshold = defaults.double(forKey: "PlaqueIOUThreshold")
-        let plaqueNMSIOUThreshold = defaults.double(forKey: "PlaqueNMSIOUThreshold")
+//        let plaqueNMSIOUThreshold = defaults.double(forKey: "PlaqueNMSIOUThreshold")
         confThreshold = (plaqueConfThreshold != 0.0 ? plaqueConfThreshold : 0.70)
-        iouThreshold = (plaqueIOUThreshold != 0.0 ? plaqueIOUThreshold : 0.85)
-        nmsIOUThreshold = (plaqueNMSIOUThreshold != 0.0 ? plaqueNMSIOUThreshold : 0.55)
+        iouThreshold = (plaqueIOUThreshold != 0.0 ? plaqueIOUThreshold : 0.55)
+//        nmsIOUThreshold = (plaqueNMSIOUThreshold != 0.0 ? plaqueNMSIOUThreshold : 0.60)
         
         self.textView.text = "Detecting plaques..."
         self.backToAssayButton.isHidden = true
@@ -143,10 +143,10 @@ class CountPlaquesViewController: UIViewController {
                         let areaOverPlaque = intersectionArea / plaqueArea
                         let areaOverOtherPlaque = intersectionArea / otherPlaqueArea
                         
-                        if (areaOverPlaque > areaOverOtherPlaque) && (areaOverPlaque >= CGFloat(nmsIOUThreshold)) {
+                        if (areaOverPlaque > areaOverOtherPlaque) && (areaOverPlaque >= CGFloat(iouThreshold)) {
                             DispatchQueue.main.async{ self.detectionOverlay.sublayers!.removeAll(where: {$0 === plaque.plaqueLayer}) }
                             mergedArray.removeAll(where: {$0 === plaque})
-                        } else if (areaOverOtherPlaque > areaOverPlaque) && (areaOverOtherPlaque >= CGFloat(nmsIOUThreshold)) {
+                        } else if (areaOverOtherPlaque > areaOverPlaque) && (areaOverOtherPlaque >= CGFloat(iouThreshold)) {
                             DispatchQueue.main.async{ self.detectionOverlay.sublayers!.removeAll(where: {$0 === otherPlaque.plaqueLayer}) }
                             mergedArray.removeAll(where: {$0 === otherPlaque})
                         }

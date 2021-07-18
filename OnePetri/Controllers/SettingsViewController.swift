@@ -13,7 +13,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var petriIOUTextField: UITextField!
     @IBOutlet weak var plaqueConfTextField: UITextField!
     @IBOutlet weak var plaqueIOUTextField: UITextField!
-    @IBOutlet weak var plaqueNMSIOUTextField: UITextField!
+//    @IBOutlet weak var plaqueNMSIOUTextField: UITextField!
     
     @IBOutlet weak var appVersionLabel: UILabel!
     @IBOutlet weak var petriModelVersionLabel: UILabel!
@@ -31,19 +31,19 @@ class SettingsViewController: UIViewController {
         let petriIOUThreshold = defaults.double(forKey: "PetriIOUThreshold")
         let plaqueConfThreshold = defaults.double(forKey: "PlaqueConfThreshold")
         let plaqueIOUThreshold = defaults.double(forKey: "PlaqueIOUThreshold")
-        let plaqueNMSIOUThreshold = defaults.double(forKey: "PlaqueNMSIOUThreshold")
+//        let plaqueNMSIOUThreshold = defaults.double(forKey: "PlaqueNMSIOUThreshold")
         
         petriConfTextField.text = (petriConfThreshold != 0.0 ? "\(petriConfThreshold)" : "")
         petriIOUTextField.text = (petriIOUThreshold != 0.0 ? "\(petriIOUThreshold)" : "")
         plaqueConfTextField.text = (plaqueConfThreshold != 0.0 ? "\(plaqueConfThreshold)" : "")
         plaqueIOUTextField.text = (plaqueIOUThreshold != 0.0 ? "\(plaqueIOUThreshold)" : "")
-        plaqueNMSIOUTextField.text = (plaqueNMSIOUThreshold != 0.0 ? "\(plaqueNMSIOUThreshold)" : "")
+//        plaqueNMSIOUTextField.text = (plaqueNMSIOUThreshold != 0.0 ? "\(plaqueNMSIOUThreshold)" : "")
         
         petriConfTextField.addDoneButtonToKeyboard(dismissAction: #selector(petriConfTextField.resignFirstResponder))
         petriIOUTextField.addDoneButtonToKeyboard(dismissAction: #selector(petriIOUTextField.resignFirstResponder))
         plaqueConfTextField.addDoneButtonToKeyboard(dismissAction: #selector(plaqueConfTextField.resignFirstResponder))
         plaqueIOUTextField.addDoneButtonToKeyboard(dismissAction: #selector(plaqueIOUTextField.resignFirstResponder))
-        plaqueNMSIOUTextField.addDoneButtonToKeyboard(dismissAction: #selector(plaqueNMSIOUTextField.resignFirstResponder))
+//        plaqueNMSIOUTextField.addDoneButtonToKeyboard(dismissAction: #selector(plaqueNMSIOUTextField.resignFirstResponder))
         
         appVersionLabel.text = "OnePetri version \(appVersion)-\(appBuild)"
         petriModelVersionLabel.text = "Petri dish model version \(petriDishModelVersion)"
@@ -55,7 +55,7 @@ class SettingsViewController: UIViewController {
     }
     
     @IBAction func didTapInfo(_ sender: UIBarButtonItem) {        
-        let svc = SFSafariViewController(url: URL(string:"https://onepetri.ai/thresholds/")!)
+        let svc = SFSafariViewController(url: URL(string:"https://onepetri.ai/technology/")!)
         svc.dismissButtonStyle = .close
         self.present(svc, animated: true, completion: nil)
     }
@@ -75,9 +75,9 @@ extension SettingsViewController: UITextFieldDelegate {
                 if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PlaqueConfThreshold") } else { defaults.removeObject(forKey: "PlaqueConfThreshold") }
             } else if textField.tag == 3 {
                 if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PlaqueIOUThreshold") } else { defaults.removeObject(forKey: "PlaqueIOUThreshold") }
-            } else if textField.tag == 4 {
+            } /*else if textField.tag == 4 {
                 if let value = textField.text, !value.isEmpty { defaults.set(Double(value), forKey: "PlaqueNMSIOUThreshold") } else { defaults.removeObject(forKey: "PlaqueNMSIOUThreshold") }
-            }
+            }*/
         }
     }
     
