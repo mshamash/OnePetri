@@ -37,10 +37,9 @@ The full changelog for OnePetri (iOS) can be found [here](https://onepetri.ai/ch
 
 
 ## Contact <a name="contact"></a>
-
+If you have any questions or comments on OnePetri, please contact Michael Shamash (michael@onepetri.ai) or [create a GitHub issue in this repository](https://github.com/mshamash/OnePetri/issues)!
 
 ## Copyright <a name="copyright"></a>
-
 OnePetri - Automating Common Microbiological Assays With AI <br />
 Copyright (C) 2021 Michael Shamash <br />
 <br />
