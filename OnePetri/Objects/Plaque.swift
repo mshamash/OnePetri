@@ -10,7 +10,7 @@ import CoreGraphics
 import QuartzCore
 
 class Plaque {
-    let petriDish: PetriDish
+    weak var petriDish: PetriDish?
 //    let locInTile: CGRect
     var locInLayer: CGRect
     let plaqueLayer: CALayer
