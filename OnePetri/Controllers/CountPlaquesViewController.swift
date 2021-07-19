@@ -41,6 +41,8 @@ class CountPlaquesViewController: UIViewController {
     private var iouThreshold: Double!
 //    private var nmsIOUThreshold: Double!
     
+    private let benchmark = false // set to true to enable benchmarking outputs to console
+    
     private var actualImageBounds: CGRect!
     
     override func viewDidLoad() {
@@ -74,16 +76,34 @@ class CountPlaquesViewController: UIViewController {
         updateLayerGeometry()
         setupVision()
         
+        let start = DispatchTime.now() // start time
+        
         detectPlaques(tiles: tileArray) {
             print("Done main tiles!")
             self.detectPlaques(tiles: self.colExtraTileArray) {
                 print("Done extra column tiles!")
                 self.detectPlaques(tiles: self.rowExtraTileArray) {
                     print("Done extra row tiles!")
-                    self.nonMaximumSuppression()
-                    DispatchQueue.main.async{
-                        if self.assaySelection != .quick { self.backToAssayButton.isHidden = false }
-                        self.helpButton.isHidden = false
+                    let end = DispatchTime.now() // end time (before NMS)
+                    
+                    self.nonMaximumSuppression {
+                        let endNMS = DispatchTime.now() // end time (after NMS)
+                        
+                        if self.benchmark {
+                            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // difference in nanoseconds, excluding additional NMS
+                            let nanoTimeNMS = endNMS.uptimeNanoseconds - start.uptimeNanoseconds // difference in nanoseconds, including additional NMS
+                            let timeInterval = Double(nanoTime) / 1_000_000_000
+                            let timeIntervalNMS = Double(nanoTimeNMS) / 1_000_000_000
+
+                            let totalNumTiles = self.tileArray.count + self.colExtraTileArray.count + self.rowExtraTileArray.count
+                            
+                            print("BENCHMARK;\(timeInterval);\(timeIntervalNMS);\(timeIntervalNMS-timeInterval);\(self.petriDish.plaques.count);\(self.tilesPerCol!);\(self.tilesPerRow!);\(self.tileArray.count);\(self.colExtraTileArray.count);\(self.rowExtraTileArray.count);\(totalNumTiles);\(self.tileWidth!);\(self.tileHeight!)")
+                        }
+                        
+                        DispatchQueue.main.async{
+                            if self.assaySelection != .quick { self.backToAssayButton.isHidden = false }
+                            self.helpButton.isHidden = false
+                        }
                     }
                 }
             }
@@ -123,7 +143,7 @@ class CountPlaquesViewController: UIViewController {
         print("===== END OF PLAQUE COUNTS =====")
     }
     
-    func nonMaximumSuppression() {
+    func nonMaximumSuppression(finished: @escaping () -> Void) {
         summarizePlaques()
         
         //all vs all comparison
@@ -156,6 +176,7 @@ class CountPlaquesViewController: UIViewController {
         }
         petriDish.plaques = mergedArray
         summarizePlaques(plaqueArray: mergedArray)
+        finished()
     }
     
     func drawRectangleOnImage(image: UIImage, rect: CGRect) -> UIImage {
