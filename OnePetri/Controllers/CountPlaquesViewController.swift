@@ -41,7 +41,7 @@ class CountPlaquesViewController: UIViewController {
     private var iouThreshold: Double!
 //    private var nmsIOUThreshold: Double!
     
-    private let benchmark = false // set to true to enable benchmarking outputs to console
+    private var benchmark = false // set to true to enable benchmarking outputs to console
     
     private var actualImageBounds: CGRect!
     
@@ -75,6 +75,10 @@ class CountPlaquesViewController: UIViewController {
         setupLayers()
         updateLayerGeometry()
         setupVision()
+        
+        #if DEBUG
+        benchmark = true
+        #endif
         
         let start = DispatchTime.now() // start time
         

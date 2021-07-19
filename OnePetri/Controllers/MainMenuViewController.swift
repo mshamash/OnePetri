@@ -28,6 +28,10 @@ class MainMenuViewController: UIViewController {
         super.viewDidLoad()
         
         appVersionLabel.text = "Version \(appVersion)-\(appBuild)"
+        
+        #if DEBUG
+        appVersionLabel.text = "Version \(appVersion)-\(appBuild)+DEBUG"
+        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
