@@ -144,11 +144,11 @@ class SelectImageViewController: UIViewController {
         do {
             let visionModel = try VNCoreMLModel(for: MLModel(contentsOf: modelURL))
             visionModel.featureProvider = ModelFeatureProvider(iouThreshold: iouThreshold, confidenceThreshold: confThreshold)
-            let objectRecognition = VNCoreMLRequest(model: visionModel, completionHandler: { (request, error) in
+            let objectRecognition = VNCoreMLRequest(model: visionModel, completionHandler: { [weak self] (request, error) in
                 DispatchQueue.main.async(execute: {
                     // perform all the UI updates on the main queue
                     if let results = request.results {
-                        self.drawVisionRequestResults(results)
+                        self?.drawVisionRequestResults(results)
                     }
                 })
             })
