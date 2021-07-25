@@ -1,4 +1,10 @@
-<p align="center"> <img src="logo.jpg" height="250" /> </p>
+<p align="center">
+  <img src="logo.jpg" height="250" /> <br /><br />
+  <a href="https://apps.apple.com/ca/app/onepetri/id1576075754?uo=4">
+    <img src="https://onepetri.ai/assets/appstore.png" height="70" />
+  </a>
+</p>
+
 
 # OnePetri
 ### AI-Powered Petri Dish Analysis
