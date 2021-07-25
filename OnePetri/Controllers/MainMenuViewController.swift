@@ -87,11 +87,20 @@ class MainMenuViewController: UIViewController {
 extension MainMenuViewController {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
-        let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        image = selectedImage
-        assaySelection = .quick // Quick count
         
-        performSegue(withIdentifier: "toSelectVC", sender: "quickCount")
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            image = selectedImage
+            assaySelection = .quick // Quick count
+            
+            performSegue(withIdentifier: "toSelectVC", sender: "quickCount")
+        } else {
+            let alert = UIAlertController(title: "Invalid selection", message: "An invalid image was selected, please try again.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+            
+            self.present(alert, animated: true)
+        }
+        
     }
 }
 
