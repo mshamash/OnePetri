@@ -8,9 +8,8 @@
 import Foundation
 import CoreML
 
-
 class ModelFeatureProvider: MLFeatureProvider {
-    // Parameters for MLModel thresholds
+    // MARK: - Properties
     var iouThreshold: Double
     var confidenceThreshold: Double
     
@@ -20,6 +19,13 @@ class ModelFeatureProvider: MLFeatureProvider {
         }
     }
     
+    // MARK: - Lifecycle
+    init(iouThreshold: Double, confidenceThreshold: Double) {
+        self.iouThreshold = iouThreshold
+        self.confidenceThreshold = confidenceThreshold
+    }
+    
+    // MARK: - Other Functions
     func featureValue(for featureName: String) -> MLFeatureValue? {
         if (featureName == "iouThreshold") {
             return MLFeatureValue(double: iouThreshold)
@@ -28,11 +34,6 @@ class ModelFeatureProvider: MLFeatureProvider {
             return MLFeatureValue(double: confidenceThreshold)
         }
         return nil
-    }
-    
-    init(iouThreshold: Double, confidenceThreshold: Double) {
-        self.iouThreshold = iouThreshold
-        self.confidenceThreshold = confidenceThreshold
     }
     
 }

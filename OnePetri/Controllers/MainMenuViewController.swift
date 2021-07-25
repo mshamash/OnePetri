@@ -16,6 +16,8 @@ let petriDishModelVersion = "1.0"
 let plaqueModelVersion = "1.0"
 
 class MainMenuViewController: UIViewController {
+    
+    // MARK: - Properties
     @IBOutlet weak var appVersionLabel: UILabel!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var photoLibraryButton: UIButton!
@@ -24,6 +26,7 @@ class MainMenuViewController: UIViewController {
     var image: UIImage?
     var assaySelection: Assay?
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,6 +47,18 @@ class MainMenuViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toSelectVC" {
+            if let destination = segue.destination as? SelectImageViewController {
+                destination.assaySelection = assaySelection
+                if let image = image, sender as? String == "quickCount" {
+                    destination.petriDishImage = image
+                }
+            }
+        }
+    }
+    
+    // MARK: - Actions
     @IBAction func selectPhotoPressed(_ sender: UIButton) {
         presentPicker(sender.tag)        
     }
@@ -70,20 +85,9 @@ class MainMenuViewController: UIViewController {
         svc.dismissButtonStyle = .close
         self.present(svc, animated: true, completion: nil)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toSelectVC" {
-            if let destination = segue.destination as? SelectImageViewController {
-                destination.assaySelection = assaySelection
-                if let image = image, sender as? String == "quickCount" {
-                    destination.petriDishImage = image
-                }
-            }
-        }
-    }
-    
 }
 
+// MARK: - UIImagePickerControllerDelegate
 extension MainMenuViewController {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
@@ -100,15 +104,6 @@ extension MainMenuViewController {
             
             self.present(alert, animated: true)
         }
-        
     }
 }
 
-
-extension UINavigationController {
-  func popToViewController(ofClass: AnyClass, animated: Bool = true) {
-    if let vc = viewControllers.filter({$0.isKind(of: ofClass)}).last {
-      popToViewController(vc, animated: animated)
-    }
-  }
-}

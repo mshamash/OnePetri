@@ -9,11 +9,11 @@ import UIKit
 import Vision
 
 class SelectImageViewController: UIViewController {
+    
+    // MARK: - Properties
     @IBOutlet weak var photoLibraryButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var helpButton: UIButton!
-
-    // MARK: - Properties
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var starterLabel: UILabel!
@@ -27,13 +27,12 @@ class SelectImageViewController: UIViewController {
     var assaySelection: Assay!
     
     private var detectionOverlay: CALayer! = nil
-    
-    // Vision parts
-    private var requests = [VNRequest]()
-    
     private var petriDetections = [PetriDish]()
     private var imgToProcess: UIImage!
     private var petriToProcess: PetriDish!
+    
+    // Vision parts
+    private var requests = [VNRequest]()
     private var confThreshold: Double!
     private var iouThreshold: Double!
     
@@ -85,35 +84,7 @@ class SelectImageViewController: UIViewController {
         }
     }
     
-    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-        let loc = tapGestureRecognizer.location(in: view)
-        let normLoc = CGPoint(x: loc.x-imageViewLeadingConstraint.constant, y: loc.y-view.safeAreaInsets.top)
-        
-        var petriDishesInTap = [PetriDish]()
-        
-        for petriDish in petriDetections {
-            if petriDish.locInView.contains(normLoc) {
-                petriDishesInTap.append(petriDish)
-            }
-        }
-        
-        // make sure tap is within 1 bounding box region only, otherwise do nothing
-        if petriDishesInTap.count == 1 {
-            let petriDish = petriDishesInTap[0]
-            let croppedImage = petriDish.croppedPetriImg
-            
-            self.imgToProcess = croppedImage
-            self.petriToProcess = petriDish
-            
-            
-            if let plaqueAssayVC = plaqueAssayViewConroller, let plateID = assayPlateID {
-                plaqueAssayVC.plates[plateID] = petriDish
-            }
-            
-            self.performSegue(withIdentifier: "toCountVC", sender: self)
-        }
-    }
-    
+    // MARK: - Actions
     @IBAction func didTapHelp(_ sender: UIButton) {
         let alert = UIAlertController(title: "Missing petri dish?", message: "If a petri dish was not detected, you may submit the selected image to help improve future iterations of OnePetri's AI models. Would you like to submit this image for analysis?", preferredStyle: .actionSheet)
         
@@ -127,11 +98,11 @@ class SelectImageViewController: UIViewController {
         self.present(alert, animated: true)
     }
   
-    // MARK: - Actions
     @IBAction func selectPhotoPressed(_ sender: UIButton) {
         presentPicker(sender.tag)
     }
     
+    // MARK: - Vision Functions
     @discardableResult
     func setupVision() -> NSError? {
         // Setup Vision parts
@@ -219,9 +190,6 @@ class SelectImageViewController: UIViewController {
                                          width: self.imageView.bounds.width,
                                          height: self.imageView.bounds.height)
         detectionOverlay.position = CGPoint(x: imageView.frame.midX, y: imageView.frame.midY)
-//        detectionOverlay.backgroundColor = CGColor(red: 255, green: 0, blue: 0, alpha: 0.3)
-//        detectionOverlay.borderColor = CGColor(red: 255, green: 0, blue: 0, alpha: 1)
-//        detectionOverlay.borderWidth = CGFloat(3.0)
         view.layer.addSublayer(detectionOverlay)
     }
     
@@ -235,9 +203,6 @@ class SelectImageViewController: UIViewController {
         // center the layer
         detectionOverlay.position = CGPoint(x: imageView.frame.midX, y: imageView.frame.midY)
         CATransaction.commit()
-//        let origin = CGRect(x: 0, y: 0, width: 10, height: 10)
-//        let originShape = self.createRoundedRectLayerWithBounds(origin)
-//        detectionOverlay.addSublayer(originShape)
 
     }
     
@@ -267,6 +232,7 @@ class SelectImageViewController: UIViewController {
         return shapeLayer
     }
     
+    // MARK: - Other Functions
     func classifyImage(_ image: UIImage) {
         let orientation = CGImagePropertyOrientation(image.imageOrientation)
         
@@ -282,6 +248,35 @@ class SelectImageViewController: UIViewController {
             } catch {
                 print("Failed to perform classification.\n\(error.localizedDescription)")
             }
+        }
+    }
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let loc = tapGestureRecognizer.location(in: view)
+        let normLoc = CGPoint(x: loc.x-imageViewLeadingConstraint.constant, y: loc.y-view.safeAreaInsets.top)
+        
+        var petriDishesInTap = [PetriDish]()
+        
+        for petriDish in petriDetections {
+            if petriDish.locInView.contains(normLoc) {
+                petriDishesInTap.append(petriDish)
+            }
+        }
+        
+        // make sure tap is within 1 bounding box region only, otherwise do nothing
+        if petriDishesInTap.count == 1 {
+            let petriDish = petriDishesInTap[0]
+            let croppedImage = petriDish.croppedPetriImg
+            
+            self.imgToProcess = croppedImage
+            self.petriToProcess = petriDish
+            
+            
+            if let plaqueAssayVC = plaqueAssayViewConroller, let plateID = assayPlateID {
+                plaqueAssayVC.plates[plateID] = petriDish
+            }
+            
+            self.performSegue(withIdentifier: "toCountVC", sender: self)
         }
     }
 }

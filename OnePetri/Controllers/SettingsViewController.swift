@@ -9,6 +9,8 @@ import UIKit
 import SafariServices
 
 class SettingsViewController: UIViewController {
+    
+    // MARK: - Properties
     @IBOutlet weak var petriConfTextField: UITextField!
     @IBOutlet weak var petriIOUTextField: UITextField!
     @IBOutlet weak var plaqueConfTextField: UITextField!
@@ -22,6 +24,7 @@ class SettingsViewController: UIViewController {
     private var defaults: UserDefaults!
     private var endEditing: Bool!
 
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -50,6 +53,7 @@ class SettingsViewController: UIViewController {
         plaqueModelVersionLabel.text = "Plaque model version \(plaqueModelVersion)"
     }
     
+    // MARK: - Actions
     @IBAction func didTapContribute(_ sender: UIButton) {
         self.sendMail(imageMail: false)
     }
@@ -62,9 +66,8 @@ class SettingsViewController: UIViewController {
 
 }
 
-
+// MARK: - UITextFieldDelegate
 extension SettingsViewController: UITextFieldDelegate {
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         if endEditing {
             if textField.tag == 0 {

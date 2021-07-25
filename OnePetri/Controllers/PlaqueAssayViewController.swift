@@ -8,6 +8,8 @@
 import UIKit
 
 class PlaqueAssayViewController: UIViewController {
+    
+    // MARK: - Properties
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var plateCountLabel: UILabel!
     @IBOutlet weak var plateStepper: UIStepper!
@@ -25,6 +27,7 @@ class PlaqueAssayViewController: UIViewController {
     var meanConcentration = ""
     var volumePlated = 100.0
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +40,17 @@ class PlaqueAssayViewController: UIViewController {
         dilutionSeriesTableView.reloadData()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toSelectVC" {
+            if let destination = segue.destination as? SelectImageViewController {
+                destination.assaySelection = assaySelection
+                destination.plaqueAssayViewConroller = self
+                destination.assayPlateID = currentPlateID!
+            }
+        }
+    }
+    
+    // MARK: - Actions
     @IBAction func plateValueChanged(_ sender: UIStepper) {        
         let stepperValue = Int(sender.value)
         
@@ -66,6 +80,7 @@ class PlaqueAssayViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
+    // MARK: - Other Functions
     func resetPlaqueAssay() {
         plates = [Int: PetriDish]()
         concentrations = [Int: String]()
@@ -80,16 +95,6 @@ class PlaqueAssayViewController: UIViewController {
         
         calculateConcentration()
         dilutionSeriesTableView.reloadData()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toSelectVC" {
-            if let destination = segue.destination as? SelectImageViewController {
-                destination.assaySelection = assaySelection
-                destination.plaqueAssayViewConroller = self
-                destination.assayPlateID = currentPlateID!
-            }
-        }
     }
     
     func calculateConcentration() {
@@ -118,12 +123,12 @@ class PlaqueAssayViewController: UIViewController {
         if let scientificFormatted = formatter.string(for: value) {
             return scientificFormatted
         }
-        
         return ""
     }
     
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension PlaqueAssayViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -152,25 +157,9 @@ extension PlaqueAssayViewController: UITableViewDelegate, UITableViewDataSource 
             let petriDish = plates[indexPath.row+1]
             cell.petriDish = petriDish
             
-           
-            
-//            let concentration = (Double(petriDish!.plaques.count) * (1000.0 / volumePlated) * NSDecimalNumber(decimal: pow(10, indexPath.row+1)).doubleValue)
-////            let roundedConcentration = String(format: "%.2f", concentration)
-            
-//            let formatter = NumberFormatter()
-//            formatter.numberStyle = .scientific
-//            formatter.positiveFormat = "0.###E+0"
-//            formatter.exponentSymbol = "e"
-//            if let scientificFormatted = formatter.string(for: concentration) {
-//                let s = (petriDish!.plaques.count == 1) ?  "" : "s"
-//                cell.concentrationLabel.text = "\(scientificFormatted) PFU/mL (\(petriDish!.plaques.count) plaque\(s))"
-//            }
-            
             let s = (petriDish!.plaques.count == 1) ?  "" : "s"
             cell.concentrationLabel.text = "\(concentrations[indexPath.row+1]!) PFU/mL (\(petriDish!.plaques.count) plaque\(s))"
-            
-//            let s = (petriDish!.plaques.count == 1) ?  "" : "s"
-//            cell.concentrationLabel.text = "\(roundedConcentration) PFU/mL (\(petriDish!.plaques.count) plaque\(s))"
+
             cell.petriImageView.image = petriDish!.croppedPetriImg
         } else {
             cell.petriDish = nil
@@ -187,10 +176,11 @@ extension PlaqueAssayViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 88
+        return 95
     }
 }
 
+// MARK: - UITextFieldDelegate
 extension PlaqueAssayViewController: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if let volume = textField.text, !volume.isEmpty { volumePlated = Double(volume)! } else { volumePlated = 100.0 }
@@ -199,7 +189,10 @@ extension PlaqueAssayViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - PlaqueAssayTableViewCell (UITableViewCell)
 class PlaqueAssayTableViewCell: UITableViewCell {
+    
+    // MARK: - Properties
     @IBOutlet weak var plateLabel: UILabel!
     @IBOutlet weak var dilutionFactorLabel: UILabel!
     @IBOutlet weak var concentrationLabel: UILabel!

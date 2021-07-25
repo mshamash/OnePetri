@@ -9,6 +9,8 @@ import UIKit
 import Vision
 
 class CountPlaquesViewController: UIViewController {
+    
+    // MARK: - Properties
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var backToAssayButton: UIButton!
@@ -41,10 +43,11 @@ class CountPlaquesViewController: UIViewController {
     private var iouThreshold: Double!
 //    private var nmsIOUThreshold: Double!
     
-    private var benchmark = false // set to true to enable benchmarking outputs to console
+    private var benchmark = false
     
     private var actualImageBounds: CGRect!
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -114,6 +117,7 @@ class CountPlaquesViewController: UIViewController {
         }
     }
     
+    // MARK: - Actions
     @IBAction func backToAssayPressed(_ sender: Any) {
         navigationController?.popToViewController(ofClass: PlaqueAssayViewController.self)
     }
@@ -131,97 +135,7 @@ class CountPlaquesViewController: UIViewController {
         self.present(alert, animated: true)
     }
     
-    func summarizePlaques(plaqueArray: [Plaque]? = nil) {
-        print("===== START OF PLAQUE COUNTS =====")
-        if let plaqueArray = plaqueArray {
-            print("Total plaque count after NMS is: \(plaqueArray.count)")
-            let s = (plaqueArray.count == 1) ?  "" : "s"
-            DispatchQueue.main.async {
-                self.textView.text = "\(plaqueArray.count) plaque\(s) detected"
-            }
-        } else {
-            print("mainPlaqueArray count is: \(mainPlaqueArray.count)")
-            print("colExtraPlaqueArray plaque array count is: \(colExtraPlaqueArray.count)")
-            print("rowExtraPlaqueArray plaque array count is: \(rowExtraPlaqueArray.count)")
-        }
-        print("===== END OF PLAQUE COUNTS =====")
-    }
-    
-    func nonMaximumSuppression(finished: @escaping () -> Void) {
-        summarizePlaques()
-        
-        //all vs all comparison
-        var mergedArray = mainPlaqueArray + colExtraPlaqueArray + rowExtraPlaqueArray
-        for plaque in mergedArray {
-            for otherPlaque in mergedArray {
-                if plaque !== otherPlaque {
-                    let plaqueLayerBds = plaque.locInLayer
-                    let otherPlaqueLayerBds = otherPlaque.locInLayer
-                    let intersection = plaqueLayerBds.intersection(otherPlaqueLayerBds)
-                    
-                    if !intersection.isNull {
-                        let intersectionArea = intersection.width * intersection.height
-                        let plaqueArea = plaqueLayerBds.width * plaqueLayerBds.height
-                        let otherPlaqueArea = otherPlaqueLayerBds.width * otherPlaqueLayerBds.height
-                        
-                        let areaOverPlaque = intersectionArea / plaqueArea
-                        let areaOverOtherPlaque = intersectionArea / otherPlaqueArea
-                        
-                        if (areaOverPlaque > areaOverOtherPlaque) && (areaOverPlaque >= CGFloat(iouThreshold)) {
-                            DispatchQueue.main.async{ self.detectionOverlay.sublayers!.removeAll(where: {$0 === plaque.plaqueLayer}) }
-                            mergedArray.removeAll(where: {$0 === plaque})
-                        } else if (areaOverOtherPlaque > areaOverPlaque) && (areaOverOtherPlaque >= CGFloat(iouThreshold)) {
-                            DispatchQueue.main.async{ self.detectionOverlay.sublayers!.removeAll(where: {$0 === otherPlaque.plaqueLayer}) }
-                            mergedArray.removeAll(where: {$0 === otherPlaque})
-                        }
-                    }
-                }
-            }
-        }
-        petriDish.plaques = mergedArray
-        summarizePlaques(plaqueArray: mergedArray)
-        finished()
-    }
-    
-    func drawRectangleOnImage(image: UIImage, rect: CGRect) -> UIImage {
-        let imageSize = image.size
-        let scale: CGFloat = image.scale
-        UIGraphicsBeginImageContextWithOptions(imageSize, false, scale)
-
-        image.draw(at: CGPoint.zero)
-        
-        UIColor(red: 1.0, green: 0, blue: 0, alpha: 0.2).setFill()
-        UIRectFill(rect)
-        
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
-    }
-    
-    func detectPlaques(tiles: [Tile], finished: @escaping () -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            for tile in tiles {
-                self.group.enter()
-                self.currentTile = tile
-                let orientation = CGImagePropertyOrientation(tile.tileImg.imageOrientation)
-                
-                guard let cgImage = tile.tileImg.cgImage else {
-                    fatalError("Unable to create \(CGImage.self) from \(tile.tileImg).")
-                }
-                
-                let handler = VNImageRequestHandler(cgImage: cgImage, orientation: orientation)
-                
-                do {
-                    try handler.perform(self.requests)
-                } catch {
-                    print("Failed to perform classification.\n\(error.localizedDescription)")
-                }
-                self.group.wait()
-            }
-            finished()
-        }
-    }
-    
+    // MARK: - Vision Functions
     @discardableResult
     func setupVision() -> NSError? {
         // Setup Vision parts
@@ -346,6 +260,98 @@ class CountPlaquesViewController: UIViewController {
         shapeLayer.borderWidth = 0.5
         shapeLayer.cornerRadius = 0
         return shapeLayer
+    }
+    
+    // MARK: - Other Functions
+    func detectPlaques(tiles: [Tile], finished: @escaping () -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            for tile in tiles {
+                self.group.enter()
+                self.currentTile = tile
+                let orientation = CGImagePropertyOrientation(tile.tileImg.imageOrientation)
+                
+                guard let cgImage = tile.tileImg.cgImage else {
+                    fatalError("Unable to create \(CGImage.self) from \(tile.tileImg).")
+                }
+                
+                let handler = VNImageRequestHandler(cgImage: cgImage, orientation: orientation)
+                
+                do {
+                    try handler.perform(self.requests)
+                } catch {
+                    print("Failed to perform classification.\n\(error.localizedDescription)")
+                }
+                self.group.wait()
+            }
+            finished()
+        }
+    }
+    
+    func summarizePlaques(plaqueArray: [Plaque]? = nil) {
+        print("===== START OF PLAQUE COUNTS =====")
+        if let plaqueArray = plaqueArray {
+            print("Total plaque count after NMS is: \(plaqueArray.count)")
+            let s = (plaqueArray.count == 1) ?  "" : "s"
+            DispatchQueue.main.async {
+                self.textView.text = "\(plaqueArray.count) plaque\(s) detected"
+            }
+        } else {
+            print("mainPlaqueArray count is: \(mainPlaqueArray.count)")
+            print("colExtraPlaqueArray plaque array count is: \(colExtraPlaqueArray.count)")
+            print("rowExtraPlaqueArray plaque array count is: \(rowExtraPlaqueArray.count)")
+        }
+        print("===== END OF PLAQUE COUNTS =====")
+    }
+    
+    func nonMaximumSuppression(finished: @escaping () -> Void) {
+        summarizePlaques()
+        
+        //all vs all comparison
+        var mergedArray = mainPlaqueArray + colExtraPlaqueArray + rowExtraPlaqueArray
+        for plaque in mergedArray {
+            for otherPlaque in mergedArray {
+                if plaque !== otherPlaque {
+                    let plaqueLayerBds = plaque.locInLayer
+                    let otherPlaqueLayerBds = otherPlaque.locInLayer
+                    let intersection = plaqueLayerBds.intersection(otherPlaqueLayerBds)
+                    
+                    if !intersection.isNull {
+                        let intersectionArea = intersection.width * intersection.height
+                        let plaqueArea = plaqueLayerBds.width * plaqueLayerBds.height
+                        let otherPlaqueArea = otherPlaqueLayerBds.width * otherPlaqueLayerBds.height
+                        
+                        let areaOverPlaque = intersectionArea / plaqueArea
+                        let areaOverOtherPlaque = intersectionArea / otherPlaqueArea
+                        
+                        if (areaOverPlaque > areaOverOtherPlaque) && (areaOverPlaque >= CGFloat(iouThreshold)) {
+                            DispatchQueue.main.async{ self.detectionOverlay.sublayers!.removeAll(where: {$0 === plaque.plaqueLayer}) }
+                            mergedArray.removeAll(where: {$0 === plaque})
+                        } else if (areaOverOtherPlaque > areaOverPlaque) && (areaOverOtherPlaque >= CGFloat(iouThreshold)) {
+                            DispatchQueue.main.async{ self.detectionOverlay.sublayers!.removeAll(where: {$0 === otherPlaque.plaqueLayer}) }
+                            mergedArray.removeAll(where: {$0 === otherPlaque})
+                        }
+                    }
+                }
+            }
+        }
+        petriDish.plaques = mergedArray
+        summarizePlaques(plaqueArray: mergedArray)
+        finished()
+    }
+    
+    func drawRectangleOnImage(image: UIImage, rect: CGRect) -> UIImage {
+        let imageSize = image.size
+        let scale: CGFloat = image.scale
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, scale)
+
+        image.draw(at: CGPoint.zero)
+        
+        UIColor(red: 1.0, green: 0, blue: 0, alpha: 0.2).setFill()
+        UIRectFill(rect)
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
     }
     
 }

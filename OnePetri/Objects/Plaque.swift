@@ -10,14 +10,15 @@ import CoreGraphics
 import QuartzCore
 
 class Plaque {
+    
+    // MARK: - Properties
     weak var petriDish: PetriDish?
-//    let locInTile: CGRect
     var locInLayer: CGRect
     let plaqueLayer: CALayer
     
-    init(petriDish: PetriDish, /*locInTile: CGRect,*/ locInLayer: CGRect, plaqueLayer: CALayer) {
+    // MARK: - Lifecycle
+    init(petriDish: PetriDish, locInLayer: CGRect, plaqueLayer: CALayer) {
         self.petriDish = petriDish
-//        self.locInTile = locInTile
         self.locInLayer = locInLayer
         self.plaqueLayer = plaqueLayer
     }
