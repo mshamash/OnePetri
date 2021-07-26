@@ -37,17 +37,17 @@ The full changelog for OnePetri (iOS) can be found [here](https://onepetri.ai/ch
 
 
 ## App Description <a name="about"></a>
-Harness the power of AI and accelerate common microbiological petri dish assays with OnePetri!
+Harness the power of AI and accelerate common microbiological Petri dish assays with OnePetri!
 
-Tired of manually counting plaques on petri dishes? Count plaques in near real-time with OnePetri, an automated plaque counting iOS app!
+Tired of manually counting plaques on Petri dishes? Count plaques in near real-time with OnePetri, an automated plaque counting iOS app!
 
 OnePetri currently supports bacteriophage plaque-based assays, with support for bacterial CFU counts coming in a future release!
 
 ### About OnePetri
 
-OnePetri uses machine learning models & computer vision to automatically detect petri dishes and plaques, count plaques, and perform common assay calculations with these values (plaque/titration assay).
+OnePetri uses machine learning models & computer vision to automatically detect Petri dishes and plaques, count plaques, and perform common assay calculations with these values (plaque/titration assay).
 
-Note that as of now, OnePetri only works with circular petri dishes; however, other shapes (square & rectangle) may be added if sufficient training images can be obtained. Additionally, the models used in the app require one plate per dilution, and as such, spot assays are not currently supported.
+Note that as of now, OnePetri only works with circular Petri dishes; however, other shapes (square & rectangle) may be added if sufficient training images can be obtained. Additionally, the models used in the app require one plate per dilution, and as such, spot assays are not currently supported.
 
 All image processing & detection is done locally on-device, with no need for an internet connection once the app has been installed. As such, OnePetri does not collect, store, or transmit any user data or images. Updates are likely to be released regularly, so regular access to the internet is strongly recommended.
 
@@ -57,10 +57,23 @@ There are no restrictions on how OnePetri is used; however, the models included 
 
 ### Help make OnePetri even better!
 
-OnePetri uses machine learning models to detect petri dishes and plaques (and soon bacterial colonies!). If you're interested in helping expand the training datasets to improve the models' performance, reach out by email to (support@onepetri.ai) . OnePetri is also completely open source, with the initial training dataset and app source code publicly available!
+OnePetri uses machine learning models to detect Petri dishes and plaques (and soon bacterial colonies!). If you're interested in helping expand the training datasets to improve the models' performance, reach out by email to (support@onepetri.ai) . OnePetri is also completely open source, with the initial training dataset and app source code publicly available!
 
 ## Using OnePetri <a name="use"></a>
-*Coming soon...*
+
+### Quick count
+
+Using the quick count feature, you can quickly get plaque counts for any image from your photo library or taken with your camera! Select the photo library or camera button to choose a photo from your library or take one with your camera, respectively. Then, Petri dishes will be detected. Tap the Petri dish of interest to proceed with analysis on that plate specifically. Finally, plaques will be detected and a final count will be returned. Don't blink or you'll miss it!
+
+### Plaque assay
+
+Choose the plaque assay option from the main menu. Using the stepper control, tap the + until reaching the number of plates/dilutions you would like to process. A maximum of 15 plates can be analyzed at any given moment. Select the plate you would like to analyze first and choose an image or take a photo for analysis. Once plaques are counted, the plate will be added to the plaque assay and PFU/mL calculated based on the value entered in the 'volume plated (uL)' field. The final averaged titre over all plates is shown at the bottom of the screen.
+
+*Note*: plate 1 corresponds to tenfold dilution factor 10^-1, plate 2 corresponds to 10^-2, and so on...
+
+*Note 2*: if you do not have all sequential plates in a dilution series, you may leave those plates blank and they will not be included in the final calculations.
+
+*More assays coming soon...*
 
 ## Contact <a name="contact"></a>
 If you have any questions or comments on OnePetri, please contact Michael Shamash (michael@onepetri.ai) or [create a GitHub issue in this repository](https://github.com/mshamash/OnePetri/issues)!
