@@ -26,9 +26,10 @@ OnePetri v1.0.0-6 is the [latest public release](https://github.com/mshamash/One
 1. [Changelog](#changelog)
 2. [App Description](#about)
 3. [Using OnePetri](#use)
-4. [Trained Models](#models)
-5. [Contact](#contact)
-6. [Copyright](#copyright)
+4. [Benchmark Dataset & Results](#benchmark)
+5. [Trained Models](#models)
+6. [Contact](#contact)
+7. [Copyright](#copyright)
 
 
 ---
@@ -75,6 +76,9 @@ Choose the plaque assay option from the main menu. Using the stepper control, ta
 **Note 2**: if you do not have all sequential plates in a dilution series, you may leave those plates blank and they will not be included in the final calculations.
 
 *More assays coming soon...*
+
+## Benchmark Dataset & Results <a name="benchmark"></a>
+The benchmark dataset of 100 images and corresponding results can be found here https://github.com/mshamash/onepetri-benchmark.
 
 ## Trained Models <a name="models"></a>
 The trained YOLOv5s models used within OnePetri can be found here https://github.com/mshamash/onepetri-models. The repository contains the PyTorch weights file (.pt extension) as well as the converted Apple CoreML model file (.mlmodel extension) and will be updated regularly, as new versions of the models are released.
