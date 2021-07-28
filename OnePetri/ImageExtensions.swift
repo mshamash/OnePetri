@@ -24,9 +24,9 @@ extension UIImage {
         var currentCol = 0
         var currentRow = 0
         
-        for y in 0..<tilesPerCol{
+        for y in stride(from: 0, to: tilesPerCol, by: 1) {
             currentCol = 0
-            for x in 0..<tilesPerRow{
+            for x in stride(from: 0, to: tilesPerRow, by: 1) {
                 UIGraphicsBeginImageContextWithOptions(tileSize, false, 0)
                 let tileCoords = CGRect.init(x: CGFloat(x) * tileSize.width * scale, y:  CGFloat(y) * tileSize.height * scale  , width: (tileSize.width * scale) , height: (tileSize.height * scale))
                 if let i =  correctedImg.cgImage?.cropping(to:  tileCoords) {
@@ -44,9 +44,9 @@ extension UIImage {
         currentCol = 0
         currentRow = 0
         
-        for row in 0..<tilesPerCol {
+        for row in stride(from: 0, to: tilesPerCol, by: 1) {
             currentCol = 0
-            for col in 1..<tilesPerRow {
+            for col in stride(from: 1, to: tilesPerRow, by: 1) {
                 UIGraphicsBeginImageContextWithOptions(tileSize, false, 0)
                 let tileCoords = CGRect.init(x: (CGFloat(col) * tileSize.width * scale)-tileSize.width/4.0, y: CGFloat(row) * tileSize.height * scale, width: (tileSize.width * scale / 2.0), height: (tileSize.height * scale))
                 if let i = correctedImg.cgImage?.cropping(to: tileCoords) {
@@ -64,9 +64,9 @@ extension UIImage {
         currentCol = 0
         currentRow = 0
         
-        for col in 1..<tilesPerRow {
+        for col in stride(from: 1, to: tilesPerRow, by: 1) {
             currentCol = 0
-            for row in 0..<tilesPerCol {
+            for row in stride(from: 0, to: tilesPerCol, by: 1) {
                 UIGraphicsBeginImageContextWithOptions(tileSize, false, 0)
                 let tileCoords =  CGRect.init(x: CGFloat(row) * tileSize.width * scale, y: (CGFloat(col) * tileSize.height * scale)-tileSize.height/4.0, width: (tileSize.width * scale), height: (tileSize.height * scale / 2.0))
                 if let i = correctedImg.cgImage?.cropping(to: tileCoords) {

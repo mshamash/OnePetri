@@ -51,65 +51,75 @@ class CountPlaquesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let defaults = UserDefaults.standard
-        let plaqueConfThreshold = defaults.double(forKey: "PlaqueConfThreshold")
-        let plaqueIOUThreshold = defaults.double(forKey: "PlaqueIOUThreshold")
-//        let plaqueNMSIOUThreshold = defaults.double(forKey: "PlaqueNMSIOUThreshold")
-        confThreshold = (plaqueConfThreshold != 0.0 ? plaqueConfThreshold : 0.70)
-        iouThreshold = (plaqueIOUThreshold != 0.0 ? plaqueIOUThreshold : 0.55)
-//        nmsIOUThreshold = (plaqueNMSIOUThreshold != 0.0 ? plaqueNMSIOUThreshold : 0.60)
-        
         self.textView.text = "Detecting plaques..."
         self.backToAssayButton.isHidden = true
         self.helpButton.isHidden = true
         
         imageView.image = petriDishImage
         
-        let tileTuple = petriDishImage.tileImageDynamically(networkSize: modelImgSize)
-        tileArray = tileTuple.0
-        colExtraTileArray = tileTuple.1
-        rowExtraTileArray = tileTuple.2
-        tileWidth = tileTuple.3
-        tileHeight = tileTuple.4
-        tilesPerCol = tileTuple.5
-        tilesPerRow = tileTuple.6
-        
-        // setup Vision parts
-        setupLayers()
-        updateLayerGeometry()
-        setupVision()
-        
-        #if DEBUG
-        benchmark = true
-        #endif
-        
-        let start = DispatchTime.now() // start time
-        
-        detectPlaques(tiles: tileArray) {
-            print("Done main tiles!")
-            self.detectPlaques(tiles: self.colExtraTileArray) {
-                print("Done extra column tiles!")
-                self.detectPlaques(tiles: self.rowExtraTileArray) {
-                    print("Done extra row tiles!")
-                    let end = DispatchTime.now() // end time (before NMS)
-                    
-                    self.nonMaximumSuppression {
-                        let endNMS = DispatchTime.now() // end time (after NMS)
+        if self.petriDishImage.size.width < 416 || self.petriDishImage.size.height < 416 {
+            let alert = UIAlertController(title: "Invalid Petri dish", message: "The Petri dish selected is too small to proceed with analysis. Please select a higher resolution image.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Go Back", style: .cancel, handler: { _ in
+                self.navigationController?.popToViewController(ofClass: SelectImageViewController.self)
+            }))
+            
+            self.present(alert, animated: true)
+        } else {
+            let defaults = UserDefaults.standard
+            let plaqueConfThreshold = defaults.double(forKey: "PlaqueConfThreshold")
+            let plaqueIOUThreshold = defaults.double(forKey: "PlaqueIOUThreshold")
+    //        let plaqueNMSIOUThreshold = defaults.double(forKey: "PlaqueNMSIOUThreshold")
+            confThreshold = (plaqueConfThreshold != 0.0 ? plaqueConfThreshold : 0.70)
+            iouThreshold = (plaqueIOUThreshold != 0.0 ? plaqueIOUThreshold : 0.55)
+    //        nmsIOUThreshold = (plaqueNMSIOUThreshold != 0.0 ? plaqueNMSIOUThreshold : 0.60)
+            
+            let tileTuple = petriDishImage.tileImageDynamically(networkSize: modelImgSize)
+            tileArray = tileTuple.0
+            colExtraTileArray = tileTuple.1
+            rowExtraTileArray = tileTuple.2
+            tileWidth = tileTuple.3
+            tileHeight = tileTuple.4
+            tilesPerCol = tileTuple.5
+            tilesPerRow = tileTuple.6
+            
+            // setup Vision parts
+            setupLayers()
+            updateLayerGeometry()
+            setupVision()
+            
+            #if DEBUG
+            benchmark = true
+            #endif
+            
+            let start = DispatchTime.now() // start time
+            
+            detectPlaques(tiles: tileArray) {
+                print("Done main tiles!")
+                self.detectPlaques(tiles: self.colExtraTileArray) {
+                    print("Done extra column tiles!")
+                    self.detectPlaques(tiles: self.rowExtraTileArray) {
+                        print("Done extra row tiles!")
+                        let end = DispatchTime.now() // end time (before NMS)
                         
-                        if self.benchmark {
-                            let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // difference in nanoseconds, excluding additional NMS
-                            let nanoTimeNMS = endNMS.uptimeNanoseconds - start.uptimeNanoseconds // difference in nanoseconds, including additional NMS
-                            let timeInterval = Double(nanoTime) / 1_000_000_000
-                            let timeIntervalNMS = Double(nanoTimeNMS) / 1_000_000_000
-
-                            let totalNumTiles = self.tileArray.count + self.colExtraTileArray.count + self.rowExtraTileArray.count
+                        self.nonMaximumSuppression {
+                            let endNMS = DispatchTime.now() // end time (after NMS)
                             
-                            print("BENCHMARK;\(timeInterval);\(timeIntervalNMS);\(timeIntervalNMS-timeInterval);\(self.petriDish.plaques.count);\(self.tilesPerCol!);\(self.tilesPerRow!);\(self.tileArray.count);\(self.colExtraTileArray.count);\(self.rowExtraTileArray.count);\(totalNumTiles);\(self.tileWidth!);\(self.tileHeight!)")
-                        }
-                        
-                        DispatchQueue.main.async{
-                            if self.assaySelection != .quick { self.backToAssayButton.isHidden = false }
-                            self.helpButton.isHidden = false
+                            if self.benchmark {
+                                let nanoTime = end.uptimeNanoseconds - start.uptimeNanoseconds // difference in nanoseconds, excluding additional NMS
+                                let nanoTimeNMS = endNMS.uptimeNanoseconds - start.uptimeNanoseconds // difference in nanoseconds, including additional NMS
+                                let timeInterval = Double(nanoTime) / 1_000_000_000
+                                let timeIntervalNMS = Double(nanoTimeNMS) / 1_000_000_000
+
+                                let totalNumTiles = self.tileArray.count + self.colExtraTileArray.count + self.rowExtraTileArray.count
+                                
+                                print("BENCHMARK;\(timeInterval);\(timeIntervalNMS);\(timeIntervalNMS-timeInterval);\(self.petriDish.plaques.count);\(self.tilesPerCol!);\(self.tilesPerRow!);\(self.tileArray.count);\(self.colExtraTileArray.count);\(self.rowExtraTileArray.count);\(totalNumTiles);\(self.tileWidth!);\(self.tileHeight!)")
+                            }
+                            
+                            DispatchQueue.main.async{
+                                if self.assaySelection != .quick { self.backToAssayButton.isHidden = false }
+                                self.helpButton.isHidden = false
+                            }
                         }
                     }
                 }
