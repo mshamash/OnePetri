@@ -26,8 +26,10 @@ OnePetri v1.0.0-6 is the [latest public release](https://github.com/mshamash/One
 1. [Changelog](#changelog)
 2. [App Description](#about)
 3. [Using OnePetri](#use)
-4. [Contact](#contact)
-5. [Copyright](#copyright)
+4. [Benchmark Dataset & Results](#benchmark)
+5. [Trained Models](#models)
+6. [Contact](#contact)
+7. [Copyright](#copyright)
 
 
 ---
@@ -69,11 +71,17 @@ Using the quick count feature, you can quickly get plaque counts for any image f
 
 Choose the plaque assay option from the main menu. Using the stepper control, tap the + until reaching the number of plates/dilutions you would like to process. A maximum of 15 plates can be analyzed at any given moment. Select the plate you would like to analyze first and choose an image or take a photo for analysis. Once plaques are counted, the plate will be added to the plaque assay and PFU/mL calculated based on the value entered in the 'volume plated (uL)' field. The final averaged titre over all plates is shown at the bottom of the screen.
 
-*Note*: plate 1 corresponds to tenfold dilution factor 10^-1, plate 2 corresponds to 10^-2, and so on...
+**Note**: plate 1 corresponds to tenfold dilution factor 10^-1, plate 2 corresponds to 10^-2, and so on...
 
-*Note 2*: if you do not have all sequential plates in a dilution series, you may leave those plates blank and they will not be included in the final calculations.
+**Note 2**: if you do not have all sequential plates in a dilution series, you may leave those plates blank and they will not be included in the final calculations.
 
 *More assays coming soon...*
+
+## Benchmark Dataset & Results <a name="benchmark"></a>
+The benchmark dataset of 100 images and corresponding results can be found here https://github.com/mshamash/onepetri-benchmark.
+
+## Trained Models <a name="models"></a>
+The trained YOLOv5s models used within OnePetri can be found here https://github.com/mshamash/onepetri-models. The repository contains the PyTorch weights file (.pt extension) as well as the converted Apple CoreML model file (.mlmodel extension) and will be updated regularly, as new versions of the models are released.
 
 ## Contact <a name="contact"></a>
 If you have any questions or comments on OnePetri, please contact Michael Shamash (michael@onepetri.ai) or [create a GitHub issue in this repository](https://github.com/mshamash/OnePetri/issues)!
