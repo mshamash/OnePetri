@@ -1,12 +1,16 @@
-@article {Shamash2021.09.27.460959,
-	author = {Shamash, Michael and Maurice, Corinne F},
-	title = {OnePetri: accelerating common bacteriophage Petri dish assays with computer vision},
-	elocation-id = {2021.09.27.460959},
-	year = {2021},
-	doi = {10.1101/2021.09.27.460959},
-	publisher = {Cold Spring Harbor Laboratory},
-	abstract = {Introduction: Bacteriophage plaque enumeration is a critical step in a wide array of protocols. The current gold standard for plaque enumeration on Petri dishes is through manual counting. This approach is time-intensive, has low-throughput, is limited to Petri dishes which have a countable number of plaques, and can have variable results upon recount due to human error. Methods: We present OnePetri, a collection of trained machine learning models and open-source mobile application for the rapid enumeration of bacteriophage plaques on circular Petri dishes. Results: When compared against the current gold standard of manual counting, OnePetri was significantly faster, with minimal error. Compared against two other similar tools, Plaque Size Tool and CFU.AI, OnePetri had higher plaque recall and reduced detection times on most test images. Conclusions: The OnePetri application can rapidly enumerate phage plaques on circular Petri dishes with high precision and recall.Competing Interest StatementThe authors have declared no competing interest.},
-	URL = {https://www.biorxiv.org/content/early/2021/09/28/2021.09.27.460959},
-	eprint = {https://www.biorxiv.org/content/early/2021/09/28/2021.09.27.460959.full.pdf},
-	journal = {bioRxiv}
-}
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Shamash"
+  given-names: "Michael"
+  orcid: "https://orcid.org/0000-0001-7900-647X"
+  affiliation: "Department of Microbiology & Immunology, McGill University, Montreal, QC, Canada"
+- family-names: "Maurice"
+  given-names: "Corinne F"
+  orcid: "https://orcid.org/0000-0001-7187-3472"
+  affiliation: "Department of Microbiology & Immunology, McGill University, Montreal, QC, Canada"
+doi: 10.1101/2021.09.27.460959
+version: 1.0.1
+date-released: 2021-09-28
+title: "OnePetri: accelerating common bacteriophage Petri dish assays with computer vision"
+url: "https://doi.org/10.1101/2021.09.27.460959"
