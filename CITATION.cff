@@ -3,14 +3,23 @@ message: "If you use this software, please cite it as below."
 authors:
 - family-names: "Shamash"
   given-names: "Michael"
-  orcid: "https://orcid.org/0000-0001-7900-647X"
-  affiliation: "Department of Microbiology & Immunology, McGill University, Montreal, QC, Canada"
-- family-names: "Maurice"
-  given-names: "Corinne F"
-  orcid: "https://orcid.org/0000-0001-7187-3472"
-  affiliation: "Department of Microbiology & Immunology, McGill University, Montreal, QC, Canada"
-doi: 10.1101/2021.09.27.460959
+  orcid: "https://orcid.org/0000-0001-7900-647X"  
 version: 1.0.1
 date-released: 2021-09-28
-title: "OnePetri: accelerating common bacteriophage Petri dish assays with computer vision"
-url: "https://doi.org/10.1101/2021.09.27.460959"
+title: "OnePetri"
+url: "https://github.com/mshamash/OnePetri"
+preferred-citation:
+  type: article
+  authors:
+  - family-names: "Shamash"
+    given-names: "Michael"
+    orcid: "https://orcid.org/0000-0001-7900-647X"
+  - family-names: "Maurice"
+    given-names: "Corinne F"
+    orcid: "https://orcid.org/0000-0001-7187-3472"
+  doi: "10.0000/00000"
+  journal: "bioRxiv"
+  month: 9
+  title: "OnePetri: accelerating common bacteriophage Petri dish assays with computer vision"
+  year: 2021
+
