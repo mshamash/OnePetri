@@ -19,7 +19,8 @@ OnePetri v1.0.0-8 is the [latest public release](https://github.com/mshamash/One
 
 ## Citation
 Please consider citing our <a href="">preprint on bioRxiv</a> if you found OnePetri useful:
-Shamash, M. & Maurice, C. F. OnePetri: accelerating common bacteriophage Petri dish assays with computer vision. bioRxiv (2021).
+
+    Shamash, M. & Maurice, C. F. OnePetri: accelerating common bacteriophage Petri dish assays with computer vision. bioRxiv (2021).
 
 ---
 
