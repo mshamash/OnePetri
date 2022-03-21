@@ -18,9 +18,9 @@ michael@onepetri.ai
 OnePetri v1.0.0-8 is the [latest public release](https://github.com/mshamash/OnePetri/releases)
 
 ## Citation
-Please consider citing our [preprint on bioRxiv](https://www.biorxiv.org/content/10.1101/2021.09.27.460959v1) if you found OnePetri useful:
+Please consider citing our [article in the journal PHAGE](https://doi.org/10.1089/phage.2021.0012) if you found OnePetri useful:
 
-Shamash, M. & Maurice, C. F. OnePetri: accelerating common bacteriophage Petri dish assays with computer vision. bioRxiv (2021).
+Shamash, M. & Maurice, C. F. OnePetri: Accelerating Common Bacteriophage Petri Dish Assays with Computer Vision. PHAGE: Therapy, Applications, and Research 2(4), 224-231 (2021).
 
 ---
 
