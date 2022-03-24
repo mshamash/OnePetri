@@ -51,7 +51,7 @@ class SelectImageViewController: UIViewController {
         let petriConfThreshold = defaults.double(forKey: "PetriConfThreshold")
         let petriIOUThreshold = defaults.double(forKey: "PetriIOUThreshold")
         confThreshold = (petriConfThreshold != 0.0 ? petriConfThreshold : 0.70)
-        iouThreshold = (petriIOUThreshold != 0.0 ? petriIOUThreshold : 0.35)
+        iouThreshold = (petriIOUThreshold != 0.0 ? petriIOUThreshold : 0.10)
         
         // setup Vision parts
         setupLayers()
@@ -129,7 +129,7 @@ class SelectImageViewController: UIViewController {
                     }
                 })
             })
-            objectRecognition.imageCropAndScaleOption = .scaleFit
+            objectRecognition.imageCropAndScaleOption = .scaleFill
             self.requests = [objectRecognition]
         } catch let error as NSError {
             print("Model loading went wrong: \(error)")
@@ -146,15 +146,16 @@ class SelectImageViewController: UIViewController {
         
         let objectObservation = results as! [VNCoreMLFeatureValueObservation]
 
-        let output1D: [Float] = try! Array(UnsafeBufferPointer<Float>(objectObservation[3].featureValue.multiArrayValue!))
+        let outputArray: [Float] = try! Array(UnsafeBufferPointer<Float>(objectObservation[3].featureValue.multiArrayValue!))
         let rows = objectObservation[3].featureValue.multiArrayValue!.shape[1].intValue
+        let valPerRow = objectObservation[3].featureValue.multiArrayValue!.shape[2].intValue
         
         var unorderedPredictions = [Prediction]()
     
         for i in 0..<rows {
-            let confidence = output1D[(i * 6) + 4]
+            let confidence = outputArray[(i * valPerRow) + 4]
             if(confidence > Float(confThreshold)){
-                 let row = Array(output1D[(i * 6)..<(i + 1) * 6])
+                 let row = Array(outputArray[(i * valPerRow)..<(i + 1) * valPerRow])
                  let classes = Array(row.dropFirst(5))
                  let classIndex : Int = classes.firstIndex(of: classes.max() ?? 0) ?? 0
                     let detection: [Float] = [row[0] - row[2]/2, row[1] - row[3]/2, row[2], row[3], confidence, Float(classIndex)]
@@ -179,7 +180,7 @@ class SelectImageViewController: UIViewController {
                 for j in (i+1)..<orderedPredictions.count {
                     if keep[j] {
                         let bbox2 = orderedPredictions[j].boundingBox
-                        if IoU(bbox1, bbox2) > 0.1 {
+                        if IoU(bbox1, bbox2) > Float(iouThreshold) {
                             keep[j] = false
                         }
                     }
@@ -270,7 +271,7 @@ class SelectImageViewController: UIViewController {
         shapeLayer.bounds = bounds
         shapeLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
         shapeLayer.name = "petri-dish"
-        shapeLayer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0.10, 0.80, 1.0, 0.2])
+        shapeLayer.backgroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0.10, 0.80, 0.35, 0.2])
         shapeLayer.cornerRadius = 7
         return shapeLayer
     }
