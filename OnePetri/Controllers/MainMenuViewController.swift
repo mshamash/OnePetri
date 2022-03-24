@@ -12,8 +12,8 @@ enum Assay { case quick, plaque, adsorption, eop }
 
 let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
 let appBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
-let petriDishModelVersion = "1.0"
-let plaqueModelVersion = "1.0"
+let petriDishModelVersion = "1.1"
+let plaqueModelVersion = "1.1"
 
 class MainMenuViewController: UIViewController {
     
