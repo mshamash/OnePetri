@@ -197,7 +197,7 @@ class SelectImageViewController: UIViewController {
             let bb = prediction.boundingBox
 
             let newBB = bb.applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
-                .applying(CGAffineTransform(translationX: 0, y: (imageView.frame.height - actualImageBounds.height)/2) ) //need to figure out Y-translation
+                .applying(CGAffineTransform(translationX: 0, y: (imageView.frame.height - actualImageBounds.height)/2))
             let shapeLayer = self.createRoundedRectLayerWithBounds(newBB)
             
             let textLayer = self.createTextSubLayerInBounds(newBB, identifier: "petri-dish", confidence: prediction.confidence)
