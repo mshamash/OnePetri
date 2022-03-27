@@ -139,9 +139,6 @@ class SelectImageViewController: UIViewController {
     }
     
     func drawVisionRequestResults(_ results: [Any]) {
-        CATransaction.begin()
-        CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
-        detectionOverlay.sublayers = nil // remove all the old recognized objects
         petriDetections = [PetriDish]()
         
         let objectObservation = results as! [VNCoreMLFeatureValueObservation]
@@ -188,6 +185,9 @@ class SelectImageViewController: UIViewController {
             }
         }
 
+        CATransaction.begin()
+        CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+        detectionOverlay.sublayers = nil // remove all the old recognized objects
         
         let actualImageBounds = imageView.frameForImageInImageViewAspectFit()
         let scaleX = actualImageBounds.width / modelImgSize
@@ -197,11 +197,11 @@ class SelectImageViewController: UIViewController {
             let bb = prediction.boundingBox
 
             let newBB = bb.applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
-                .applying(CGAffineTransform(translationX: 0, y: (imageView.frame.height - actualImageBounds.height)/2))
+                .applying(CGAffineTransform(translationX: (imageView.frame.width - actualImageBounds.width)/2, y: (imageView.frame.height - actualImageBounds.height)/2))
             let shapeLayer = self.createRoundedRectLayerWithBounds(newBB)
             
-            let textLayer = self.createTextSubLayerInBounds(newBB, identifier: "petri-dish", confidence: prediction.confidence)
-            shapeLayer.addSublayer(textLayer)
+//            let textLayer = self.createTextSubLayerInBounds(newBB, identifier: "petri-dish", confidence: prediction.confidence)
+//            shapeLayer.addSublayer(textLayer)
             
             detectionOverlay.addSublayer(shapeLayer)
 
