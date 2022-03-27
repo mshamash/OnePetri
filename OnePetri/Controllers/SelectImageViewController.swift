@@ -84,6 +84,7 @@ class SelectImageViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toCountVC" {
             if let destination = segue.destination as? CountPlaquesViewController {
+                destination.origPetriDishImage = petriDishImage
                 destination.petriDishImage = imgToProcess
                 destination.petriDish = petriToProcess
                 destination.assaySelection = assaySelection
@@ -96,7 +97,7 @@ class SelectImageViewController: UIViewController {
         let alert = UIAlertController(title: "Missing Petri dish?", message: "If a Petri dish was not detected, you may submit the selected image to help improve future iterations of OnePetri's AI models. Would you like to submit this image for analysis?", preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "Send Image", style: .default, handler: { _ in
-            self.sendMail(imageMail: true, imageView: self.imageView, imageType: "petri dish")
+            self.sendMail(imageMail: true, image: self.petriDishImage, imageType: "Petri dish")
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         

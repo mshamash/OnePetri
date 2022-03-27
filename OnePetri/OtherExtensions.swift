@@ -29,7 +29,7 @@ extension UITextField {
 }
 
 extension UIViewController: MFMailComposeViewControllerDelegate {
-    func sendMail(imageMail: Bool, imageView: UIImageView? = nil, imageType: String? = nil) {
+    func sendMail(imageMail: Bool, image: UIImage? = nil, imageType: String? = nil) {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self;
@@ -37,7 +37,7 @@ extension UIViewController: MFMailComposeViewControllerDelegate {
             mail.setMessageBody("Submitted using OnePetri, version \(appVersion)-\(appBuild)", isHTML: false)
             if imageMail {
                 mail.setSubject("OnePetri Image Submission - \(imageType!)")
-                let imageData = imageView!.image!.pngData()!
+                let imageData = image!.pngData()!
                 mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "image.png")
             } else {
                 mail.setSubject("OnePetri Feedback")
