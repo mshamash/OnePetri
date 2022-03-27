@@ -48,7 +48,7 @@ extension UIImage {
             currentCol = 0
             for col in stride(from: 1, to: tilesPerRow, by: 1) {
                 UIGraphicsBeginImageContextWithOptions(tileSize, false, 0)
-                let tileCoords = CGRect.init(x: (CGFloat(col) * tileSize.width * scale)-tileSize.width/4.0, y: CGFloat(row) * tileSize.height * scale, width: (tileSize.width * scale / 2.0), height: (tileSize.height * scale))
+                let tileCoords = CGRect.init(x: (CGFloat(col) * tileSize.width * scale)-tileSize.width/2.0, y: CGFloat(row) * tileSize.height * scale, width: (tileSize.width * scale), height: (tileSize.height * scale))
                 if let i = correctedImg.cgImage?.cropping(to: tileCoords) {
                     let newImg = UIImage.init(cgImage: i, scale: scale, orientation: correctedImg.imageOrientation)
                     let tile = Tile(tileImg: newImg, tileCoords: tileCoords, locRowColumn: CGPoint(x: currentCol, y: currentRow), tileType: .colExtraTile)
@@ -68,7 +68,7 @@ extension UIImage {
             currentCol = 0
             for row in stride(from: 0, to: tilesPerCol, by: 1) {
                 UIGraphicsBeginImageContextWithOptions(tileSize, false, 0)
-                let tileCoords =  CGRect.init(x: CGFloat(row) * tileSize.width * scale, y: (CGFloat(col) * tileSize.height * scale)-tileSize.height/4.0, width: (tileSize.width * scale), height: (tileSize.height * scale / 2.0))
+                let tileCoords =  CGRect.init(x: CGFloat(row) * tileSize.width * scale, y: (CGFloat(col) * tileSize.height * scale)-tileSize.height/2.0, width: (tileSize.width * scale), height: (tileSize.height * scale))
                 if let i = correctedImg.cgImage?.cropping(to: tileCoords) {
                     let newImg = UIImage.init(cgImage: i, scale: scale, orientation: correctedImg.imageOrientation)
                     let tile = Tile(tileImg: newImg, tileCoords: tileCoords, locRowColumn: CGPoint(x: currentCol, y: currentRow), tileType: .rowExtraTile)
