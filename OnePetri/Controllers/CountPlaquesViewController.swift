@@ -75,8 +75,8 @@ class CountPlaquesViewController: UIViewController {
             let defaults = UserDefaults.standard
             let plaqueConfThreshold = defaults.double(forKey: "PlaqueConfThreshold")
             let plaqueIOUThreshold = defaults.double(forKey: "PlaqueIOUThreshold")
-            confThreshold = (plaqueConfThreshold != 0.0 ? plaqueConfThreshold : 0.70)
-            iouThreshold = (plaqueIOUThreshold != 0.0 ? plaqueIOUThreshold : 0.55)
+            confThreshold = (plaqueConfThreshold != 0.0 ? plaqueConfThreshold : 0.85)
+            iouThreshold = (plaqueIOUThreshold != 0.0 ? plaqueIOUThreshold : 0.25)
             
             let tileTuple = petriDishImage.tileImageDynamically(networkSize: modelImgSize)
             tileArray = tileTuple.0
@@ -155,7 +155,7 @@ class CountPlaquesViewController: UIViewController {
         // Setup Vision parts
         let error: NSError! = nil
         
-        guard let modelURL = Bundle.main.url(forResource: "Yv5-plaque-res640_epochs500_v6-yv5n_v61", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle.main.url(forResource: "Yv5-plaque-res640_epochs250_v7-yv5n_v61", withExtension: "mlmodelc") else {
             return NSError(domain: "VisionObjectRecognitionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "Model file is missing"])
         }
         
@@ -265,7 +265,7 @@ class CountPlaquesViewController: UIViewController {
             case .rowExtraTile:
                 let objectBounds = tempBox.offsetBy(dx: currentTile.locRowColumn.x * tileWidth, dy: (currentTile.locRowColumn.y * tileHeight) - (tileHeight * 0.5))
                     .applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
-                    .applying(CGAffineTransform(translationX: offsetX, y: offsetY + (actualImageBounds.height / CGFloat(tilesPerRow))))
+                    .applying(CGAffineTransform(translationX: offsetX, y: offsetY + (actualImageBounds.height / CGFloat(tilesPerCol))))
 
                 let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds, color: [1.0, 0.0, 0.0])
                 detectionOverlay.addSublayer(shapeLayer)
