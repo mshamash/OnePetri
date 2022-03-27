@@ -38,14 +38,19 @@ class CountPlaquesViewController: UIViewController {
     
     let group = DispatchGroup()
     var currentTile: Tile!
-    private let modelImgSize: CGFloat = 416.0
+    private let modelImgSize: CGFloat = 640.0
     private var confThreshold: Double!
     private var iouThreshold: Double!
-//    private var nmsIOUThreshold: Double!
     
     private var benchmark = false
     
     private var actualImageBounds: CGRect!
+    
+    struct Prediction {
+        let labelIndex: Int
+        let confidence: Float
+        let boundingBox: CGRect
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -57,7 +62,7 @@ class CountPlaquesViewController: UIViewController {
         
         imageView.image = petriDishImage
         
-        if self.petriDishImage.size.width < 416 || self.petriDishImage.size.height < 416 {
+        if self.petriDishImage.size.width < modelImgSize || self.petriDishImage.size.height < modelImgSize {
             let alert = UIAlertController(title: "Invalid Petri dish", message: "The Petri dish selected is too small to proceed with analysis. Please select a higher resolution image.", preferredStyle: .alert)
             
             alert.addAction(UIAlertAction(title: "Go Back", style: .cancel, handler: { _ in
@@ -69,10 +74,8 @@ class CountPlaquesViewController: UIViewController {
             let defaults = UserDefaults.standard
             let plaqueConfThreshold = defaults.double(forKey: "PlaqueConfThreshold")
             let plaqueIOUThreshold = defaults.double(forKey: "PlaqueIOUThreshold")
-    //        let plaqueNMSIOUThreshold = defaults.double(forKey: "PlaqueNMSIOUThreshold")
             confThreshold = (plaqueConfThreshold != 0.0 ? plaqueConfThreshold : 0.70)
             iouThreshold = (plaqueIOUThreshold != 0.0 ? plaqueIOUThreshold : 0.55)
-    //        nmsIOUThreshold = (plaqueNMSIOUThreshold != 0.0 ? plaqueNMSIOUThreshold : 0.60)
             
             let tileTuple = petriDishImage.tileImageDynamically(networkSize: modelImgSize)
             tileArray = tileTuple.0
@@ -151,13 +154,12 @@ class CountPlaquesViewController: UIViewController {
         // Setup Vision parts
         let error: NSError! = nil
         
-        guard let modelURL = Bundle.main.url(forResource: "Yv5-plaque-res416_epochs500_bat128_v5-1", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle.main.url(forResource: "Yv5-plaque-res640_epochs500_v6-yv5n_v61", withExtension: "mlmodelc") else {
             return NSError(domain: "VisionObjectRecognitionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "Model file is missing"])
         }
         
         do {
             let visionModel = try VNCoreMLModel(for: MLModel(contentsOf: modelURL))
-            visionModel.featureProvider = ModelFeatureProvider(iouThreshold: iouThreshold, confidenceThreshold: confThreshold)
             let objectRecognition = VNCoreMLRequest(model: visionModel, completionHandler: { [weak self] (request, error) in
                 DispatchQueue.main.async(execute: {
                     // perform all the UI updates on the main queue
@@ -166,7 +168,7 @@ class CountPlaquesViewController: UIViewController {
                     }
                 })
             })
-            objectRecognition.imageCropAndScaleOption = .scaleFit
+            objectRecognition.imageCropAndScaleOption = .scaleFill
             self.requests = [objectRecognition]
         } catch let error as NSError {
             print("Model loading went wrong: \(error)")
@@ -176,59 +178,101 @@ class CountPlaquesViewController: UIViewController {
     }
     
     func drawVisionRequestResults(_ results: [Any]) {
-        let transformVerticalAxis = CGAffineTransform(scaleX: 1, y: -1)
+        let objectObservation = results as! [VNCoreMLFeatureValueObservation]
+
+        let outputArray: [Float] = try! Array(UnsafeBufferPointer<Float>(objectObservation[3].featureValue.multiArrayValue!))
+        let rows = objectObservation[3].featureValue.multiArrayValue!.shape[1].intValue
+        let valPerRow = objectObservation[3].featureValue.multiArrayValue!.shape[2].intValue
+        
+        var unorderedPredictions = [Prediction]()
+
+        for i in 0..<rows {
+            let confidence = outputArray[(i * valPerRow) + 4]
+            if(confidence > Float(confThreshold)){
+                 let row = Array(outputArray[(i * valPerRow)..<(i + 1) * valPerRow])
+                 let classes = Array(row.dropFirst(5))
+                 let classIndex : Int = classes.firstIndex(of: classes.max() ?? 0) ?? 0
+                    let detection: [Float] = [row[0] - row[2]/2, row[1] - row[3]/2, row[2], row[3], confidence, Float(classIndex)]
+                
+                
+                let bb = CGRect(x: Double(detection[0]), y: Double(detection[1]), width: Double(detection[2]), height: Double(detection[3]))
+                
+                let prediction = Prediction(labelIndex: classIndex,
+                                                    confidence: confidence,
+                                                    boundingBox: bb)
+                unorderedPredictions.append(prediction)
+               }
+     
+        }
+        
+        // Array to store final predictions (after post-processing)
+        var predictions: [Prediction] = []
+        let orderedPredictions = unorderedPredictions.sorted { $0.confidence > $1.confidence }
+        var keep = [Bool](repeating: true, count: orderedPredictions.count)
+        for i in 0..<orderedPredictions.count {
+            if keep[i] {
+                predictions.append(orderedPredictions[i])
+                let bbox1 = orderedPredictions[i].boundingBox
+                for j in (i+1)..<orderedPredictions.count {
+                    if keep[j] {
+                        let bbox2 = orderedPredictions[j].boundingBox
+                        if IoU(bbox1, bbox2) > Float(iouThreshold) {
+                            keep[j] = false
+                        }
+                    }
+                }
+            }
+        }
         
         actualImageBounds = imageView.frameForImageInImageViewAspectFit()
         
         let scaleX = actualImageBounds.width / petriDishImage.size.width
         let scaleY = actualImageBounds.height / petriDishImage.size.height
         
-        let offsetY = (actualImageBounds.height / CGFloat(tilesPerCol)) + (imageView.bounds.height-actualImageBounds.size.height)/2
-        let offsetX: CGFloat = (actualImageBounds.width / CGFloat(tilesPerRow)) + (imageView.bounds.width-actualImageBounds.size.width)/2
+        let offsetX = (imageView.bounds.width-actualImageBounds.size.width)/2.0
+        let offsetY = (imageView.bounds.height-actualImageBounds.size.height)/2.0
         
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         
-        for observation in results where observation is VNRecognizedObjectObservation {
-            guard let objectObservation = observation as? VNRecognizedObjectObservation else {
-                continue
-            }
+        for prediction in predictions  {
+            let bb = prediction.boundingBox
+            let bbNorm = CGRect(x: bb.origin.x/modelImgSize, y: bb.origin.y/modelImgSize, width: bb.width/modelImgSize, height: bb.height/modelImgSize)
+            let tempBox = VNImageRectForNormalizedRect(bbNorm, Int(tileWidth), Int(tileHeight))
             
             switch currentTile.tileType {
             case .tile:
-                let tempBox = VNImageRectForNormalizedRect(objectObservation.boundingBox, Int(tileWidth), Int(tileHeight)).applying(transformVerticalAxis)
                 let objectBounds = tempBox.offsetBy(dx: currentTile.locRowColumn.x * tileWidth, dy: currentTile.locRowColumn.y * tileHeight)
                     .applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
-                    .applying(CGAffineTransform(translationX: (self.imageView.bounds.width-actualImageBounds.size.width)/2, y: offsetY))
-                
+                    .applying(CGAffineTransform(translationX: offsetX, y: offsetY))
+
                 let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds, color: [1.0, 0.0, 0.0])
                 detectionOverlay.addSublayer(shapeLayer)
-                
+
                 mainPlaqueArray.append(Plaque(petriDish: petriDish, locInLayer: shapeLayer.bounds, plaqueLayer: shapeLayer))
                 
             case .colExtraTile:
-                let tempBox = VNImageRectForNormalizedRect(objectObservation.boundingBox, Int(tileWidth/2), Int(tileHeight)).applying(transformVerticalAxis)
-                let objectBounds = tempBox.offsetBy(dx: (currentTile.locRowColumn.x * tileWidth) - (tileWidth * 0.25), dy: currentTile.locRowColumn.y * tileHeight)
+                let objectBounds = tempBox.offsetBy(dx: (currentTile.locRowColumn.x * tileWidth) - (tileWidth * 0.5), dy: currentTile.locRowColumn.y * tileHeight)
                     .applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
-                    .applying(CGAffineTransform(translationX: offsetX, y: offsetY))
+                    .applying(CGAffineTransform(translationX: offsetX + (actualImageBounds.width / CGFloat(tilesPerRow)), y: offsetY))
+                
                 let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds, color: [1.0, 0.0, 0.0])
                 detectionOverlay.addSublayer(shapeLayer)
-                
+
                 colExtraPlaqueArray.append(Plaque(petriDish: petriDish, locInLayer: shapeLayer.bounds, plaqueLayer: shapeLayer))
-                
+
             case .rowExtraTile:
-                let tempBox = VNImageRectForNormalizedRect(objectObservation.boundingBox, Int(tileWidth), Int(tileHeight/2)).applying(transformVerticalAxis)
-                let objectBounds = tempBox.offsetBy(dx: currentTile.locRowColumn.x * tileWidth, dy: (currentTile.locRowColumn.y * tileHeight) + (tileHeight * 0.25))
+                let objectBounds = tempBox.offsetBy(dx: currentTile.locRowColumn.x * tileWidth, dy: (currentTile.locRowColumn.y * tileHeight) - (tileHeight * 0.5))
                     .applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
-                    .applying(CGAffineTransform(translationX: (self.imageView.bounds.width-actualImageBounds.size.width)/2, y: offsetY))
-                
+                    .applying(CGAffineTransform(translationX: offsetX, y: offsetY + (actualImageBounds.height / CGFloat(tilesPerRow))))
+
                 let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds, color: [1.0, 0.0, 0.0])
                 detectionOverlay.addSublayer(shapeLayer)
-                
+
                 rowExtraPlaqueArray.append(Plaque(petriDish: petriDish, locInLayer: shapeLayer.bounds, plaqueLayer: shapeLayer))
             }
-            
         }
+        
         self.updateLayerGeometry()
         
         CATransaction.commit()
@@ -362,6 +406,12 @@ class CountPlaquesViewController: UIViewController {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage!
+    }
+    
+    public func IoU(_ a: CGRect, _ b: CGRect) -> Float {
+        let intersection = a.intersection(b)
+        let union = a.union(b)
+        return Float((intersection.width * intersection.height) / (union.width * union.height))
     }
     
 }
