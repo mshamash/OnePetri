@@ -12,7 +12,7 @@
 		4C573C6A269A645B009FFD6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C573C68269A645B009FFD6D /* Main.storyboard */; };
 		4C573C6C269A645D009FFD6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C573C6B269A645D009FFD6D /* Assets.xcassets */; };
 		4C573C6F269A645D009FFD6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C573C6D269A645D009FFD6D /* LaunchScreen.storyboard */; };
-		4C7678B227EBF9B500014D35 /* Yv5-plaque-res640_epochs500_v6-yv5n_v61.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4C7678B127EBF9B500014D35 /* Yv5-plaque-res640_epochs500_v6-yv5n_v61.mlmodel */; };
+		4C75595127F113A700202793 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4C75595027F113A700202793 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel */; };
 		4C7678B627EBFC6B00014D35 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4C7678B527EBFC6B00014D35 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel */; };
 		4C98A366269A657F00A20495 /* CountPlaquesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A361269A657F00A20495 /* CountPlaquesViewController.swift */; };
 		4C98A367269A657F00A20495 /* SelectImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A362269A657F00A20495 /* SelectImageViewController.swift */; };
@@ -34,7 +34,7 @@
 		4C573C6B269A645D009FFD6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C573C6E269A645D009FFD6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C573C70269A645D009FFD6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C7678B127EBF9B500014D35 /* Yv5-plaque-res640_epochs500_v6-yv5n_v61.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "Yv5-plaque-res640_epochs500_v6-yv5n_v61.mlmodel"; sourceTree = "<group>"; };
+		4C75595027F113A700202793 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel"; sourceTree = "<group>"; };
 		4C7678B527EBFC6B00014D35 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel"; sourceTree = "<group>"; };
 		4C98A361269A657F00A20495 /* CountPlaquesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountPlaquesViewController.swift; sourceTree = "<group>"; };
 		4C98A362269A657F00A20495 /* SelectImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectImageViewController.swift; sourceTree = "<group>"; };
@@ -108,8 +108,8 @@
 		4C98A36B269A659100A20495 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4C7678B127EBF9B500014D35 /* Yv5-plaque-res640_epochs500_v6-yv5n_v61.mlmodel */,
 				4C7678B527EBFC6B00014D35 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel */,
+				4C75595027F113A700202793 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -194,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C75595127F113A700202793 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel in Sources */,
 				4C98A37B269A65A500A20495 /* ImageExtensions.swift in Sources */,
 				4C98A368269A657F00A20495 /* MainMenuViewController.swift in Sources */,
 				4C7678B627EBFC6B00014D35 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel in Sources */,
@@ -201,7 +202,6 @@
 				4C98A378269A659A00A20495 /* Tile.swift in Sources */,
 				4C98A366269A657F00A20495 /* CountPlaquesViewController.swift in Sources */,
 				4C98A367269A657F00A20495 /* SelectImageViewController.swift in Sources */,
-				4C7678B227EBF9B500014D35 /* Yv5-plaque-res640_epochs500_v6-yv5n_v61.mlmodel in Sources */,
 				4C573C63269A645B009FFD6D /* AppDelegate.swift in Sources */,
 				4C98A369269A657F00A20495 /* PlaqueAssayViewController.swift in Sources */,
 				4C573C65269A645B009FFD6D /* SceneDelegate.swift in Sources */,

@@ -219,11 +219,11 @@ class SelectImageViewController: UIViewController {
         CATransaction.commit()
         
         if predictions.count == 0 {
-            textView.text = "No Petri dishes were detected."
+            textView.text = "No Petri dishes detected"
         } else if predictions.count == 1 {
-            textView.text = "1 Petri dish was detected. Tap the Petri dish of interest to proceed with analysis."
+            textView.text = "1 Petri dish detected\nTap the Petri dish to continue"
         } else {
-            textView.text = "\(predictions.count) Petri dishes were detected. Tap the Petri dish of interest to proceed with analysis."
+            textView.text = "\(predictions.count) Petri dishes detected\nTap a Petri dish to continue"
         }
     }
     
@@ -238,7 +238,7 @@ class SelectImageViewController: UIViewController {
         view.layer.addSublayer(detectionOverlay)
     }
     
-    func updateLayerGeometry() {        
+    func updateLayerGeometry() {
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         detectionOverlay.bounds = CGRect(x: 0.0,
