@@ -28,9 +28,7 @@ class CountPlaquesViewController: UIViewController {
     private var tileArray = [Tile]()
     private var colExtraTileArray = [Tile]()
     private var rowExtraTileArray = [Tile]()
-    private var mainPlaqueArray = [Plaque]()
-    private var colExtraPlaqueArray = [Plaque]()
-    private var rowExtraPlaqueArray = [Plaque]()
+    private var mergedPlaqueArray = [Plaque]()
     
     private var tilesPerCol: Int!
     private var tilesPerRow: Int!
@@ -199,38 +197,28 @@ class CountPlaquesViewController: UIViewController {
             
             let tempBox = VNImageRectForNormalizedRect(objectObservation.boundingBox, Int(currentTileWidth), Int(currentTileHeight)).applying(transformVerticalAxis)
             
+            var objectBounds: CGRect
+            
             switch currentTile.tileType {
             case .tile:
-                let objectBounds = tempBox.offsetBy(dx: currentTile.locRowColumn.x * currentTileWidth, dy: currentTile.locRowColumn.y * currentTileHeight)
+                objectBounds = tempBox.offsetBy(dx: currentTile.locRowColumn.x * currentTileWidth, dy: currentTile.locRowColumn.y * currentTileHeight)
                     .applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
                     .applying(CGAffineTransform(translationX: (self.imageView.bounds.width-actualImageBounds.size.width)/2, y: offsetY))
                 
-                let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds, color: [1.0, 0.0, 0.0])
-                detectionOverlay.addSublayer(shapeLayer)
-                
-                mainPlaqueArray.append(Plaque(petriDish: petriDish, locInLayer: shapeLayer.bounds, plaqueLayer: shapeLayer))
-                
             case .colExtraTile:
-                let objectBounds = tempBox.offsetBy(dx: (currentTile.locRowColumn.x * currentTileWidth) - (currentTileWidth * 0.5), dy: currentTile.locRowColumn.y * currentTileHeight)
+                objectBounds = tempBox.offsetBy(dx: (currentTile.locRowColumn.x * currentTileWidth) - (currentTileWidth * 0.5), dy: currentTile.locRowColumn.y * currentTileHeight)
                     .applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
                     .applying(CGAffineTransform(translationX: offsetX, y: offsetY))
                 
-                let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds, color: [1.0, 0.0, 0.0])
-                detectionOverlay.addSublayer(shapeLayer)
-                
-                colExtraPlaqueArray.append(Plaque(petriDish: petriDish, locInLayer: shapeLayer.bounds, plaqueLayer: shapeLayer))
-                
             case .rowExtraTile:
-                let objectBounds = tempBox.offsetBy(dx: currentTile.locRowColumn.x * currentTileWidth, dy: (currentTile.locRowColumn.y * currentTileHeight) + (currentTileHeight * 0.5))
+                objectBounds = tempBox.offsetBy(dx: currentTile.locRowColumn.x * currentTileWidth, dy: (currentTile.locRowColumn.y * currentTileHeight) + (currentTileHeight * 0.5))
                     .applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
                     .applying(CGAffineTransform(translationX: (self.imageView.bounds.width-actualImageBounds.size.width)/2, y: offsetY))
-                
-                let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds, color: [1.0, 0.0, 0.0])
-                detectionOverlay.addSublayer(shapeLayer)
-                
-                rowExtraPlaqueArray.append(Plaque(petriDish: petriDish, locInLayer: shapeLayer.bounds, plaqueLayer: shapeLayer))
             }
             
+            let shapeLayer = self.createRoundedRectLayerWithBounds(objectBounds, color: [1.0, 0.0, 0.0])
+            detectionOverlay.addSublayer(shapeLayer)
+            mergedPlaqueArray.append(Plaque(petriDish: petriDish, locInLayer: shapeLayer.bounds, plaqueLayer: shapeLayer))
         }
         
         self.updateLayerGeometry()
@@ -302,28 +290,23 @@ class CountPlaquesViewController: UIViewController {
     }
     
     func summarizePlaques(plaqueArray: [Plaque]? = nil) {
-        print("===== START OF PLAQUE COUNTS =====")
         if let plaqueArray = plaqueArray {
-            print("Total plaque count after NMS is: \(plaqueArray.count)")
+            print("Total plaque count AFTER NMS is: \(plaqueArray.count)")
             let s = (plaqueArray.count == 1) ?  "" : "s"
             DispatchQueue.main.async {
                 self.textView.text = "\(plaqueArray.count) plaque\(s) detected"
             }
         } else {
-            print("mainPlaqueArray count is: \(mainPlaqueArray.count)")
-            print("colExtraPlaqueArray plaque array count is: \(colExtraPlaqueArray.count)")
-            print("rowExtraPlaqueArray plaque array count is: \(rowExtraPlaqueArray.count)")
+            print("Total plaque count BEFORE NMS is: \(mergedPlaqueArray.count)")
         }
-        print("===== END OF PLAQUE COUNTS =====")
     }
     
     func nonMaximumSuppression(finished: @escaping () -> Void) {
         summarizePlaques()
         
         //all vs all comparison
-        var mergedArray = mainPlaqueArray + colExtraPlaqueArray + rowExtraPlaqueArray
-        for plaque in mergedArray {
-            for otherPlaque in mergedArray {
+        for plaque in mergedPlaqueArray {
+            for otherPlaque in mergedPlaqueArray {
                 if plaque !== otherPlaque {
                     let plaqueLayerBds = plaque.locInLayer
                     let otherPlaqueLayerBds = otherPlaque.locInLayer
@@ -339,17 +322,17 @@ class CountPlaquesViewController: UIViewController {
                         
                         if (areaOverPlaque > areaOverOtherPlaque) && (areaOverPlaque >= CGFloat(iouThreshold)) {
                             DispatchQueue.main.async{ self.detectionOverlay.sublayers!.removeAll(where: {$0 === plaque.plaqueLayer}) }
-                            mergedArray.removeAll(where: {$0 === plaque})
+                            mergedPlaqueArray.removeAll(where: {$0 === plaque})
                         } else if (areaOverOtherPlaque > areaOverPlaque) && (areaOverOtherPlaque >= CGFloat(iouThreshold)) {
                             DispatchQueue.main.async{ self.detectionOverlay.sublayers!.removeAll(where: {$0 === otherPlaque.plaqueLayer}) }
-                            mergedArray.removeAll(where: {$0 === otherPlaque})
+                            mergedPlaqueArray.removeAll(where: {$0 === otherPlaque})
                         }
                     }
                 }
             }
         }
-        petriDish.plaques = mergedArray
-        summarizePlaques(plaqueArray: mergedArray)
+        petriDish.plaques = mergedPlaqueArray
+        summarizePlaques(plaqueArray: mergedPlaqueArray)
         finished()
     }
     
