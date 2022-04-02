@@ -8,11 +8,11 @@
 import UIKit
 
 extension UIImage {
-    func tileImageDynamically(networkSize: CGFloat) -> ([Tile], [Tile], [Tile], CGFloat, CGFloat, Int, Int) {
+    func tileImageDynamically(networkSize: CGFloat) -> ([Tile], [Tile], [Tile], Int, Int) {
         let correctedImg = removeRotationForImage(image: self)
         
-        let tilesPerCol = Int(round(self.size.height / networkSize))
-        let tilesPerRow = Int(round(self.size.width / networkSize))
+        let tilesPerCol = Int(ceil(self.size.height / networkSize))
+        let tilesPerRow = Int(ceil(self.size.width / networkSize))
         
         let tileHeight = self.size.height / CGFloat(tilesPerCol)
         let tileWidth = self.size.width / CGFloat(tilesPerRow)
@@ -31,7 +31,7 @@ extension UIImage {
                 let tileCoords = CGRect.init(x: CGFloat(x) * tileSize.width * scale, y:  CGFloat(y) * tileSize.height * scale  , width: (tileSize.width * scale) , height: (tileSize.height * scale))
                 if let i =  correctedImg.cgImage?.cropping(to:  tileCoords) {
                     let newImg = UIImage.init(cgImage: i, scale: scale, orientation: correctedImg.imageOrientation)
-                    let tile = Tile(tileImg: newImg, tileCoords: tileCoords, locRowColumn: CGPoint(x: currentCol, y: currentRow), tileType: .tile)
+                    let tile = Tile(tileImg: newImg, locRowColumn: CGPoint(x: currentCol, y: currentRow), tileType: .tile)
                     tileArray.append(tile)
                 }
                 UIGraphicsEndImageContext();
@@ -51,7 +51,7 @@ extension UIImage {
                 let tileCoords = CGRect.init(x: (CGFloat(col) * tileSize.width * scale)-tileSize.width/2.0, y: CGFloat(row) * tileSize.height * scale, width: (tileSize.width * scale), height: (tileSize.height * scale))
                 if let i = correctedImg.cgImage?.cropping(to: tileCoords) {
                     let newImg = UIImage.init(cgImage: i, scale: scale, orientation: correctedImg.imageOrientation)
-                    let tile = Tile(tileImg: newImg, tileCoords: tileCoords, locRowColumn: CGPoint(x: currentCol, y: currentRow), tileType: .colExtraTile)
+                    let tile = Tile(tileImg: newImg, locRowColumn: CGPoint(x: currentCol, y: currentRow), tileType: .colExtraTile)
                     colExtraTileArray.append(tile)
                 }
                 UIGraphicsEndImageContext();
@@ -71,7 +71,7 @@ extension UIImage {
                 let tileCoords =  CGRect.init(x: CGFloat(row) * tileSize.width * scale, y: (CGFloat(col) * tileSize.height * scale)-tileSize.height/2.0, width: (tileSize.width * scale), height: (tileSize.height * scale))
                 if let i = correctedImg.cgImage?.cropping(to: tileCoords) {
                     let newImg = UIImage.init(cgImage: i, scale: scale, orientation: correctedImg.imageOrientation)
-                    let tile = Tile(tileImg: newImg, tileCoords: tileCoords, locRowColumn: CGPoint(x: currentCol, y: currentRow), tileType: .rowExtraTile)
+                    let tile = Tile(tileImg: newImg, locRowColumn: CGPoint(x: currentCol, y: currentRow), tileType: .rowExtraTile)
                     rowExtraTileArray.append(tile)
                 }
                 UIGraphicsEndImageContext();
@@ -80,7 +80,7 @@ extension UIImage {
             currentRow += 1
         }
         
-        return (tileArray, colExtraTileArray, rowExtraTileArray, tileWidth, tileHeight, tilesPerCol, tilesPerRow)
+        return (tileArray, colExtraTileArray, rowExtraTileArray, tilesPerCol, tilesPerRow)
     }
     
     func croppedInRect(rect: CGRect) -> UIImage {

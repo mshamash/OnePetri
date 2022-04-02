@@ -11,17 +11,15 @@ class Tile {
     
     // MARK: - Properties
     let tileImg: UIImage
-    let tileCoords: CGRect
     let locRowColumn: CGPoint
     let tileType: TileTypes
     enum TileTypes { case tile, colExtraTile, rowExtraTile }
     
     // MARK: - Lifecycle
-    init(tileImg: UIImage, tileCoords: CGRect, locRowColumn: CGPoint, tileType: TileTypes) {
+    init(tileImg: UIImage, locRowColumn: CGPoint, tileType: TileTypes) {
         self.tileImg = tileImg
         self.tileType = tileType
         self.locRowColumn = locRowColumn
-        self.tileCoords = tileCoords
     }
 
 }

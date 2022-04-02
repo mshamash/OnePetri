@@ -24,6 +24,7 @@
 		4C98A378269A659A00A20495 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A375269A659A00A20495 /* Tile.swift */; };
 		4C98A37B269A65A500A20495 /* ImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A379269A65A500A20495 /* ImageExtensions.swift */; };
 		4C98A37C269A65A500A20495 /* OtherExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A37A269A65A500A20495 /* OtherExtensions.swift */; };
+		4CA5206727F87B1B0047F5F3 /* ModelFeatureProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA5206627F87B1B0047F5F3 /* ModelFeatureProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		4C98A375269A659A00A20495 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		4C98A379269A65A500A20495 /* ImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtensions.swift; sourceTree = "<group>"; };
 		4C98A37A269A65A500A20495 /* OtherExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherExtensions.swift; sourceTree = "<group>"; };
+		4CA5206627F87B1B0047F5F3 /* ModelFeatureProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelFeatureProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		4C98A36B269A659100A20495 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4CA5206627F87B1B0047F5F3 /* ModelFeatureProvider.swift */,
 				4C7678B527EBFC6B00014D35 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel */,
 				4C75595027F113A700202793 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel */,
 			);
@@ -201,6 +204,7 @@
 				4C98A37C269A65A500A20495 /* OtherExtensions.swift in Sources */,
 				4C98A378269A659A00A20495 /* Tile.swift in Sources */,
 				4C98A366269A657F00A20495 /* CountPlaquesViewController.swift in Sources */,
+				4CA5206727F87B1B0047F5F3 /* ModelFeatureProvider.swift in Sources */,
 				4C98A367269A657F00A20495 /* SelectImageViewController.swift in Sources */,
 				4C573C63269A645B009FFD6D /* AppDelegate.swift in Sources */,
 				4C98A369269A657F00A20495 /* PlaqueAssayViewController.swift in Sources */,

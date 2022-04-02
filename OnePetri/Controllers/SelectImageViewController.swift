@@ -122,6 +122,7 @@ class SelectImageViewController: UIViewController {
         
         do {
             let visionModel = try VNCoreMLModel(for: MLModel(contentsOf: modelURL))
+            visionModel.featureProvider = ModelFeatureProvider(iouThreshold: iouThreshold, confidenceThreshold: confThreshold)
             let objectRecognition = VNCoreMLRequest(model: visionModel, completionHandler: { [weak self] (request, error) in
                 DispatchQueue.main.async(execute: {
                     // perform all the UI updates on the main queue
@@ -130,7 +131,7 @@ class SelectImageViewController: UIViewController {
                     }
                 })
             })
-            objectRecognition.imageCropAndScaleOption = .scaleFill
+            objectRecognition.imageCropAndScaleOption = .scaleFit
             self.requests = [objectRecognition]
         } catch let error as NSError {
             print("Model loading went wrong: \(error)")
@@ -142,88 +143,51 @@ class SelectImageViewController: UIViewController {
     func drawVisionRequestResults(_ results: [Any]) {
         petriDetections = [PetriDish]()
         
-        let objectObservation = results as! [VNCoreMLFeatureValueObservation]
-
-        let outputArray: [Float] = try! Array(UnsafeBufferPointer<Float>(objectObservation[3].featureValue.multiArrayValue!))
-        let rows = objectObservation[3].featureValue.multiArrayValue!.shape[1].intValue
-        let valPerRow = objectObservation[3].featureValue.multiArrayValue!.shape[2].intValue
-        
-        var unorderedPredictions = [Prediction]()
-    
-        for i in 0..<rows {
-            let confidence = outputArray[(i * valPerRow) + 4]
-            if(confidence > Float(confThreshold)){
-                 let row = Array(outputArray[(i * valPerRow)..<(i + 1) * valPerRow])
-                 let classes = Array(row.dropFirst(5))
-                 let classIndex : Int = classes.firstIndex(of: classes.max() ?? 0) ?? 0
-                    let detection: [Float] = [row[0] - row[2]/2, row[1] - row[3]/2, row[2], row[3], confidence, Float(classIndex)]
-                
-                
-                let bb = CGRect(x: Double(detection[0]), y: Double(detection[1]), width: Double(detection[2]), height: Double(detection[3]))
-                
-                let prediction = Prediction(labelIndex: classIndex,
-                                                    confidence: confidence,
-                                                    boundingBox: bb)
-                unorderedPredictions.append(prediction)
-               }
-            }
-        
-        var predictions: [Prediction] = []
-        let orderedPredictions = unorderedPredictions.sorted { $0.confidence > $1.confidence }
-        var keep = [Bool](repeating: true, count: orderedPredictions.count)
-        for i in 0..<orderedPredictions.count {
-            if keep[i] {
-                predictions.append(orderedPredictions[i])
-                let bbox1 = orderedPredictions[i].boundingBox
-                for j in (i+1)..<orderedPredictions.count {
-                    if keep[j] {
-                        let bbox2 = orderedPredictions[j].boundingBox
-                        if IoU(bbox1, bbox2) > Float(iouThreshold) {
-                            keep[j] = false
-                        }
-                    }
-                }
-            }
-        }
-
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         detectionOverlay.sublayers = nil // remove all the old recognized objects
         
         let actualImageBounds = imageView.frameForImageInImageViewAspectFit()
-        let scaleX = actualImageBounds.width / modelImgSize
-        let scaleY = actualImageBounds.height / modelImgSize
         
-        for prediction in predictions {
-            let bb = prediction.boundingBox
-
-            let newBB = bb.applying(CGAffineTransform(scaleX: scaleX, y: scaleY))
-                .applying(CGAffineTransform(translationX: (imageView.frame.width - actualImageBounds.width)/2, y: (imageView.frame.height - actualImageBounds.height)/2))
+        for observation in results where observation is VNRecognizedObjectObservation {
+            guard let objectObservation = observation as? VNRecognizedObjectObservation else {
+                continue
+            }
+            
+            let bb = objectObservation.boundingBox
+            
+            let objectBounds = VNImageRectForNormalizedRect(bb, Int(actualImageBounds.width), Int(actualImageBounds.height))
+            
+            let newOriginX = objectBounds.origin.x + (imageView.frame.width - actualImageBounds.width)/2
+            let newOriginY = objectBounds.origin.y + (imageView.frame.height - actualImageBounds.height)/2
+            
+            let boundingBox = CGRect(x: newOriginX, y: newOriginY, width: objectBounds.width, height: objectBounds.height)
+            
+            let transformVerticalAxis = CGAffineTransform(scaleX: 1, y: -1)
+            let newBB = boundingBox.applying(transformVerticalAxis.translatedBy(x: 0, y: -imageView.bounds.size.height))
+            
             let shapeLayer = self.createRoundedRectLayerWithBounds(newBB)
-            
-//            let textLayer = self.createTextSubLayerInBounds(newBB, identifier: "petri-dish", confidence: prediction.confidence)
-//            shapeLayer.addSublayer(textLayer)
-            
             detectionOverlay.addSublayer(shapeLayer)
-
-            let bbnorm = CGRect(x: bb.origin.x/modelImgSize, y: bb.origin.y/modelImgSize, width: bb.size.width/modelImgSize, height: bb.size.height/modelImgSize)
-            var imgBounds = VNImageRectForNormalizedRect(bbnorm, Int(imageView.image!.size.width), Int(imageView.image!.size.height))
-            imgBounds.size.height = round(imgBounds.size.height)
-            imgBounds.size.width = round(imgBounds.size.width)
-
-            petriDetections.append(PetriDish(locInView: shapeLayer.frame, locInImg: imgBounds, croppedPetriImg: imageView.image!.croppedInRect(rect: imgBounds)))
+            
+            
+            let imgBounds = VNImageRectForNormalizedRect(bb, Int(imageView.image!.size.width), Int(imageView.image!.size.height))
+            var transformedImgBounds = imgBounds.applying(transformVerticalAxis.translatedBy(x: 0, y: -imageView.image!.size.height))
+            transformedImgBounds.size.height = round(transformedImgBounds.size.height)
+            transformedImgBounds.size.width = round(transformedImgBounds.size.width)
+            
+            petriDetections.append(PetriDish(locInView: shapeLayer.frame, locInImg: transformedImgBounds, croppedPetriImg: imageView.image!.croppedInRect(rect: transformedImgBounds)))
         }
-        
+
         self.updateLayerGeometry()
         
         CATransaction.commit()
         
-        if predictions.count == 0 {
+        if results.count == 0 {
             textView.text = "No Petri dishes detected"
-        } else if predictions.count == 1 {
+        } else if results.count == 1 {
             textView.text = "1 Petri dish detected\nTap the Petri dish to continue"
         } else {
-            textView.text = "\(predictions.count) Petri dishes detected\nTap a Petri dish to continue"
+            textView.text = "\(results.count) Petri dishes detected\nTap a Petri dish to continue"
         }
     }
     
@@ -249,22 +213,6 @@ class SelectImageViewController: UIViewController {
         detectionOverlay.position = CGPoint(x: imageView.frame.midX, y: imageView.frame.midY)
         CATransaction.commit()
 
-    }
-    
-    func createTextSubLayerInBounds(_ bounds: CGRect, identifier: String, confidence: Float) -> CATextLayer {
-        let textLayer = CATextLayer()
-        textLayer.name = "Object Label"
-        let formattedString = NSMutableAttributedString(string: String(format: "\(identifier)\nConfidence:  %.2f", confidence))
-        let largeFont = UIFont(name: "Helvetica", size: 24.0)!
-        formattedString.addAttributes([NSAttributedString.Key.font: largeFont], range: NSRange(location: 0, length: identifier.count))
-        textLayer.string = formattedString
-        textLayer.bounds = CGRect(x: 0, y: 0, width: bounds.size.height - 10, height: bounds.size.width - 10)
-        textLayer.position = CGPoint(x: bounds.midX, y: bounds.midY)
-        textLayer.shadowOpacity = 0.7
-        textLayer.shadowOffset = CGSize(width: 2, height: 2)
-        textLayer.foregroundColor = CGColor(colorSpace: CGColorSpaceCreateDeviceRGB(), components: [0.0, 0.0, 0.0, 1.0])
-        textLayer.contentsScale = 2.0 // retina rendering
-        return textLayer
     }
     
     func createRoundedRectLayerWithBounds(_ bounds: CGRect) -> CALayer {
@@ -323,12 +271,6 @@ class SelectImageViewController: UIViewController {
             
             self.performSegue(withIdentifier: "toCountVC", sender: self)
         }
-    }
-    
-    public func IoU(_ a: CGRect, _ b: CGRect) -> Float {
-        let intersection = a.intersection(b)
-        let union = a.union(b)
-        return Float((intersection.width * intersection.height) / (union.width * union.height))
     }
 }
 
