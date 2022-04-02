@@ -71,8 +71,8 @@ class CountPlaquesViewController: UIViewController {
             let defaults = UserDefaults.standard
             let plaqueConfThreshold = defaults.double(forKey: "PlaqueConfThreshold")
             let plaqueIOUThreshold = defaults.double(forKey: "PlaqueIOUThreshold")
-            confThreshold = (plaqueConfThreshold != 0.0 ? plaqueConfThreshold : 0.85)
-            iouThreshold = (plaqueIOUThreshold != 0.0 ? plaqueIOUThreshold : 0.25)
+            confThreshold = (plaqueConfThreshold != 0.0 ? plaqueConfThreshold : 0.70)
+            iouThreshold = (plaqueIOUThreshold != 0.0 ? plaqueIOUThreshold : 0.55)
             
             let tileTuple = petriDishImage.tileImageDynamically(networkSize: modelImgSize)
             tileArray = tileTuple.0

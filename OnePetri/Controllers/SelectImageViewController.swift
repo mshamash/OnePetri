@@ -50,8 +50,8 @@ class SelectImageViewController: UIViewController {
         let defaults = UserDefaults.standard
         let petriConfThreshold = defaults.double(forKey: "PetriConfThreshold")
         let petriIOUThreshold = defaults.double(forKey: "PetriIOUThreshold")
-        confThreshold = (petriConfThreshold != 0.0 ? petriConfThreshold : 0.40)
-        iouThreshold = (petriIOUThreshold != 0.0 ? petriIOUThreshold : 0.10)
+        confThreshold = (petriConfThreshold != 0.0 ? petriConfThreshold : 0.50)
+        iouThreshold = (petriIOUThreshold != 0.0 ? petriIOUThreshold : 0.35)
         
         // setup Vision parts
         setupLayers()
