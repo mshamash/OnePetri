@@ -83,7 +83,7 @@ Choose the plaque assay option from the main menu. Using the stepper control, ta
 The benchmark dataset of 100 images and corresponding results can be found here https://github.com/mshamash/onepetri-benchmark.
 
 ## Trained Models <a name="models"></a>
-The trained YOLOv5s models used within OnePetri can be found here https://github.com/mshamash/onepetri-models. The repository contains the PyTorch weights file (.pt extension) as well as the converted Apple CoreML model file (.mlmodel extension) and will be updated regularly, as new versions of the models are released.
+The trained YOLOv5 models used within OnePetri can be found here https://github.com/mshamash/onepetri-models. The repository contains the PyTorch weights file (.pt extension) as well as the converted Apple CoreML model file (.mlmodel extension) and will be updated regularly, as new versions of the models are released.
 
 ## Contact <a name="contact"></a>
 If you have any questions or comments on OnePetri, please contact Michael Shamash (michael@onepetri.ai) or [create a GitHub issue in this repository](https://github.com/mshamash/OnePetri/issues)!
