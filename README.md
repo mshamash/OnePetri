@@ -15,7 +15,7 @@ McGill University <br />
 michael@onepetri.ai
 
 ## Current Version
-OnePetri v1.0.0-8 is the [latest public release](https://github.com/mshamash/OnePetri/releases)
+OnePetri v1.1.1-11 is the [latest public release](https://github.com/mshamash/OnePetri/releases)
 
 ## Citation
 Please consider citing our [article in the journal PHAGE](https://doi.org/10.1089/phage.2021.0012) if you found OnePetri useful:
