@@ -116,7 +116,7 @@ class SelectImageViewController: UIViewController {
         // Setup Vision parts
         let error: NSError! = nil
         
-        guard let modelURL = Bundle.main.url(forResource: "Yv5-petri-res640_epochs500_v4-yv5n_v61", withExtension: "mlmodelc") else {
+        guard let modelURL = Bundle.main.url(forResource: "Yv5-petri-res640_epochs500_v4-yv5n_v61.quant", withExtension: "mlmodelc") else {
             return NSError(domain: "VisionObjectRecognitionViewController", code: -1, userInfo: [NSLocalizedDescriptionKey: "Model file is missing"])
         }
         

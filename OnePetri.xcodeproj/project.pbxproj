@@ -12,8 +12,8 @@
 		4C573C6A269A645B009FFD6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C573C68269A645B009FFD6D /* Main.storyboard */; };
 		4C573C6C269A645D009FFD6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C573C6B269A645D009FFD6D /* Assets.xcassets */; };
 		4C573C6F269A645D009FFD6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C573C6D269A645D009FFD6D /* LaunchScreen.storyboard */; };
-		4C75595127F113A700202793 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4C75595027F113A700202793 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel */; };
-		4C7678B627EBFC6B00014D35 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4C7678B527EBFC6B00014D35 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel */; };
+		4C86E7E927FB3ABC00CEED53 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.quant.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E7E727FB3ABC00CEED53 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.quant.mlmodel */; };
+		4C86E7EA27FB3ABC00CEED53 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.quant.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 4C86E7E827FB3ABC00CEED53 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.quant.mlmodel */; };
 		4C98A366269A657F00A20495 /* CountPlaquesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A361269A657F00A20495 /* CountPlaquesViewController.swift */; };
 		4C98A367269A657F00A20495 /* SelectImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A362269A657F00A20495 /* SelectImageViewController.swift */; };
 		4C98A368269A657F00A20495 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C98A363269A657F00A20495 /* MainMenuViewController.swift */; };
@@ -35,8 +35,8 @@
 		4C573C6B269A645D009FFD6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C573C6E269A645D009FFD6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C573C70269A645D009FFD6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4C75595027F113A700202793 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel"; sourceTree = "<group>"; };
-		4C7678B527EBFC6B00014D35 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel"; sourceTree = "<group>"; };
+		4C86E7E727FB3ABC00CEED53 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.quant.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "Yv5-plaque-res640_epochs250_v7-yv5n_v61.quant.mlmodel"; sourceTree = "<group>"; };
+		4C86E7E827FB3ABC00CEED53 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.quant.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "Yv5-petri-res640_epochs500_v4-yv5n_v61.quant.mlmodel"; sourceTree = "<group>"; };
 		4C98A361269A657F00A20495 /* CountPlaquesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountPlaquesViewController.swift; sourceTree = "<group>"; };
 		4C98A362269A657F00A20495 /* SelectImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectImageViewController.swift; sourceTree = "<group>"; };
 		4C98A363269A657F00A20495 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
@@ -111,8 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				4CA5206627F87B1B0047F5F3 /* ModelFeatureProvider.swift */,
-				4C7678B527EBFC6B00014D35 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel */,
-				4C75595027F113A700202793 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel */,
+				4C86E7E827FB3ABC00CEED53 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.quant.mlmodel */,
+				4C86E7E727FB3ABC00CEED53 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.quant.mlmodel */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -197,10 +197,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C75595127F113A700202793 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.mlmodel in Sources */,
 				4C98A37B269A65A500A20495 /* ImageExtensions.swift in Sources */,
+				4C86E7EA27FB3ABC00CEED53 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.quant.mlmodel in Sources */,
 				4C98A368269A657F00A20495 /* MainMenuViewController.swift in Sources */,
-				4C7678B627EBFC6B00014D35 /* Yv5-petri-res640_epochs500_v4-yv5n_v61.mlmodel in Sources */,
 				4C98A37C269A65A500A20495 /* OtherExtensions.swift in Sources */,
 				4C98A378269A659A00A20495 /* Tile.swift in Sources */,
 				4C98A366269A657F00A20495 /* CountPlaquesViewController.swift in Sources */,
@@ -210,6 +209,7 @@
 				4C98A369269A657F00A20495 /* PlaqueAssayViewController.swift in Sources */,
 				4C573C65269A645B009FFD6D /* SceneDelegate.swift in Sources */,
 				4C98A377269A659A00A20495 /* Plaque.swift in Sources */,
+				4C86E7E927FB3ABC00CEED53 /* Yv5-plaque-res640_epochs250_v7-yv5n_v61.quant.mlmodel in Sources */,
 				4C98A376269A659A00A20495 /* PetriDish.swift in Sources */,
 				4C98A36A269A657F00A20495 /* SettingsViewController.swift in Sources */,
 			);
@@ -359,14 +359,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = H7C3AE5HUF;
 				INFOPLIST_FILE = OnePetri/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = ai.onepetri.onepetri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -380,14 +380,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = H7C3AE5HUF;
 				INFOPLIST_FILE = OnePetri/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = ai.onepetri.onepetri;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
