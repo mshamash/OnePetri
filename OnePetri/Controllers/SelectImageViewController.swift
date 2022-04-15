@@ -37,12 +37,6 @@ class SelectImageViewController: UIViewController {
     private var confThreshold: Double!
     private var iouThreshold: Double!
     
-    struct Prediction {
-        let labelIndex: Int
-        let confidence: Float
-        let boundingBox: CGRect
-    }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

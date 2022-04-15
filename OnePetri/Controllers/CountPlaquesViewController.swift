@@ -43,12 +43,6 @@ class CountPlaquesViewController: UIViewController {
     
     private var actualImageBounds: CGRect!
     
-    struct Prediction {
-        let labelIndex: Int
-        let confidence: Float
-        let boundingBox: CGRect
-    }
-    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
