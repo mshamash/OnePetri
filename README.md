@@ -12,7 +12,6 @@
 Michael Shamash <br />
 Maurice Lab <br />
 McGill University <br />
-michael@onepetri.ai
 
 ## Current Version
 OnePetri v1.1.1-11 is the [latest public release](https://github.com/mshamash/OnePetri/releases)
@@ -59,10 +58,6 @@ All image processing & detection is done locally on-device, with no need for an 
 
 There are no restrictions on how OnePetri is used; however, the models included in the app may occasionally miscount plaques (too many, or too few) and this could affect downstream experiments and calculations. As such, all counts done by the app should always be validated by manual counting or another established "gold standard", especially in cases where it is critical to know precise values (ie. phage titration for phage therapy). The model accuracy will improve with each release thanks to additional training data provided by the community.
 
-### Help make OnePetri even better!
-
-OnePetri uses machine learning models to detect Petri dishes and plaques (and soon bacterial colonies!). If you're interested in helping expand the training datasets to improve the models' performance, reach out by email to (support@onepetri.ai) . OnePetri is also completely open source, with the initial training dataset and app source code publicly available!
-
 ## Using OnePetri <a name="use"></a>
 
 ### Quick count
@@ -86,7 +81,7 @@ The benchmark dataset of 100 images and corresponding results can be found here 
 The trained YOLOv5 models used within OnePetri can be found here https://github.com/mshamash/onepetri-models. The repository contains the PyTorch weights file (.pt extension) as well as the converted Apple CoreML model file (.mlmodel extension) and will be updated regularly, as new versions of the models are released.
 
 ## Contact <a name="contact"></a>
-If you have any questions or comments on OnePetri, please contact Michael Shamash (michael@onepetri.ai) or [create a GitHub issue in this repository](https://github.com/mshamash/OnePetri/issues)!
+If you have any questions or comments on OnePetri, please [create a GitHub issue in this repository](https://github.com/mshamash/OnePetri/issues)!
 
 ## Copyright <a name="copyright"></a>
 OnePetri - AI-Powered Petri Dish Analysis <br />

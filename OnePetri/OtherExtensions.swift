@@ -28,29 +28,6 @@ extension UITextField {
     }
 }
 
-extension UIViewController: MFMailComposeViewControllerDelegate {
-    func sendMail(imageMail: Bool, image: UIImage? = nil, imageType: String? = nil) {
-        if MFMailComposeViewController.canSendMail() {
-            let mail = MFMailComposeViewController()
-            mail.mailComposeDelegate = self;
-            mail.setToRecipients(["support@onepetri.ai"])
-            mail.setMessageBody("Submitted using OnePetri, version \(appVersion)-\(appBuild)", isHTML: false)
-            if imageMail {
-                mail.setSubject("OnePetri Image Submission - \(imageType!)")
-                let imageData = image!.pngData()!
-                mail.addAttachmentData(imageData, mimeType: "image/png", fileName: "image.png")
-            } else {
-                mail.setSubject("OnePetri Feedback")
-            }
-            present(mail, animated: true, completion: nil)
-        }
-    }
-    
-    public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
-    }
-}
-
 extension UIViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func presentPicker(_ tag: Int) {
         if tag == 0 {

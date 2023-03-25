@@ -14,7 +14,6 @@ class CountPlaquesViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var backToAssayButton: UIButton!
-    @IBOutlet weak var helpButton: UIButton!
     
     var plaqueAssayViewConroller: PlaqueAssayViewController?
     
@@ -49,7 +48,6 @@ class CountPlaquesViewController: UIViewController {
         
         self.textView.text = "Detecting plaques..."
         self.backToAssayButton.isHidden = true
-        self.helpButton.isHidden = true
         
         imageView.image = petriDishImage
         
@@ -110,7 +108,6 @@ class CountPlaquesViewController: UIViewController {
                             
                             DispatchQueue.main.async{
                                 if self.assaySelection != .quick { self.backToAssayButton.isHidden = false }
-                                self.helpButton.isHidden = false
                             }
                         }
                     }
@@ -122,19 +119,6 @@ class CountPlaquesViewController: UIViewController {
     // MARK: - Actions
     @IBAction func backToAssayPressed(_ sender: Any) {
         navigationController?.popToViewController(ofClass: PlaqueAssayViewController.self)
-    }
-    
-    @IBAction func didTapHelp(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Missing plaques?", message: "If some plaques were not detected, you may submit the selected image to help improve future iterations of OnePetri's AI models. Would you like to submit this image for analysis?", preferredStyle: .actionSheet)
-        
-        alert.addAction(UIAlertAction(title: "Send Image", style: .default, handler: { _ in
-            self.sendMail(imageMail: true, image: self.origPetriDishImage, imageType: "plaque")
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        alert.popoverPresentationController?.sourceView = helpButton
-        
-        self.present(alert, animated: true)
     }
     
     // MARK: - Vision Functions

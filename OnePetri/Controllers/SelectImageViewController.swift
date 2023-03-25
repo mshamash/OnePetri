@@ -13,7 +13,6 @@ class SelectImageViewController: UIViewController {
     // MARK: - Properties
     @IBOutlet weak var photoLibraryButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
-    @IBOutlet weak var helpButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var starterLabel: UILabel!
@@ -63,14 +62,12 @@ class SelectImageViewController: UIViewController {
             
             starterLabel.isHidden = true
             textView.isHidden = false
-            helpButton.isHidden = false
             
             updateLayerGeometry()
             classifyImage(petriDishImage)
         } else {
             starterLabel.isHidden = false
             textView.isHidden = true
-            helpButton.isHidden = true
         }
         
   }
@@ -87,19 +84,6 @@ class SelectImageViewController: UIViewController {
     }
     
     // MARK: - Actions
-    @IBAction func didTapHelp(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Missing Petri dish?", message: "If a Petri dish was not detected, you may submit the selected image to help improve future iterations of OnePetri's AI models. Would you like to submit this image for analysis?", preferredStyle: .actionSheet)
-        
-        alert.addAction(UIAlertAction(title: "Send Image", style: .default, handler: { _ in
-            self.sendMail(imageMail: true, image: self.petriDishImage, imageType: "Petri dish")
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
-        alert.popoverPresentationController?.sourceView = helpButton
-        
-        self.present(alert, animated: true)
-    }
-  
     @IBAction func selectPhotoPressed(_ sender: UIButton) {
         presentPicker(sender.tag)
     }
@@ -279,7 +263,6 @@ extension SelectImageViewController {
         
         imageView.image = image
         textView.isHidden = false
-        helpButton.isHidden = false
         starterLabel.isHidden = true
         
         updateLayerGeometry()
