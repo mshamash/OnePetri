@@ -1,7 +1,7 @@
 <p align="center">
   <img src="logo.jpg" height="250" /> <br /><br />
   <a href="https://apps.apple.com/ca/app/onepetri/id1576075754?uo=4">
-    <img src="https://onepetri.ai/assets/appstore.png" height="70" />
+    <img src="https://onepetri.shamash.me/assets/appstore.png" height="70" />
   </a>
 </p>
 
@@ -36,7 +36,7 @@ Shamash, M. & Maurice, C. F. OnePetri: Accelerating Common Bacteriophage Petri D
 ---
 
 ## Changelog <a name="changelog"></a>
-The full changelog for OnePetri (iOS) can be found [here](https://onepetri.ai/changelog/) or on the releases page [here](https://github.com/mshamash/OnePetri/releases).
+The full changelog for OnePetri (iOS) can be found [here](https://onepetri.shamash.me/changelog/) or on the releases page [here](https://github.com/mshamash/OnePetri/releases).
 
 
 ## App Description <a name="about"></a>
