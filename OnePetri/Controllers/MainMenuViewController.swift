@@ -81,7 +81,7 @@ class MainMenuViewController: UIViewController {
     }
     
     @IBAction func didTapTips(_ sender: UIButton) {
-        let svc = SFSafariViewController(url: URL(string:"https://onepetri.ai/tips/")!)
+        let svc = SFSafariViewController(url: URL(string:"https://onepetri.shamash.me/tips/")!)
         svc.dismissButtonStyle = .close
         self.present(svc, animated: true, completion: nil)
     }

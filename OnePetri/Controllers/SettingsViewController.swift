@@ -55,7 +55,7 @@ class SettingsViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func didTapInfo(_ sender: UIBarButtonItem) {        
-        let svc = SFSafariViewController(url: URL(string:"https://onepetri.ai/technology/")!)
+        let svc = SFSafariViewController(url: URL(string:"https://onepetri.shamash.me/technology/")!)
         svc.dismissButtonStyle = .close
         self.present(svc, animated: true, completion: nil)
     }
